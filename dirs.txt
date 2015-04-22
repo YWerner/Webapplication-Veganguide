@@ -1,0 +1,11 @@
+g01-general-documents
+g02-project-model
+p01-requirements-analysis
+p02-specification
+p03-system-design
+p04-programming
+p05-integration
+p06-roll-out
+s01-configuration-management
+s02-quality-assurance
+s03-infrastructure
