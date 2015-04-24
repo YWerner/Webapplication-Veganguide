@@ -5,11 +5,11 @@
  */
 
 /* Date bubble */
-#new-places span.ui-li-count {
+#new span.ui-li-count {
 	top: 30px; /* shift to same height as the title of the new place */
 }
 /* Description */
-#new-places p {
+#new p {
 	white-space: normal; /* show full text */
 }
 
