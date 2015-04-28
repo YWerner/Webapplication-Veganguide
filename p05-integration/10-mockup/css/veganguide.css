@@ -96,3 +96,12 @@ img[data-role="map"] {
 #place li[data-role="navbar"] a {
 	margin: 0 2px 0 2px;
 }
+
+/* Page: place detailed
+ * Section: comments 
+ */
+/* Date bubble */
+#comments span.ui-li-count {
+	top: 30px; /* shift to same height as the title of the new place */
+}
+
