@@ -31,7 +31,6 @@ figcaption {
     padding: 5px;
     margin: 5px auto 5px auto;
     display: block;
-    width: 90%;
 }
 #place img + figcaption {
 	display: none;
@@ -43,7 +42,16 @@ figcaption + #place img {
 img[data-role="map"] {
 	max-width: 95%;
 }
-
+#lightGallery {
+	padding: 0;
+}
+#lightGallery li {
+	margin: 0;
+	display: none;
+}
+#lightGallery li.first {
+	display: block;
+}
 /* place page dt list */
 #place dl {
 	display: block;
@@ -104,4 +112,19 @@ img[data-role="map"] {
 #comments span.ui-li-count {
 	top: 30px; /* shift to same height as the title of the new place */
 }
-
+/* list of comments */
+#comments {
+	padding: 0; /* reset padding of list in list */
+}
+/* button to expand/collapse the comments */
+#buttonComments {
+	/* reset css wich is applied because its a button */
+	background-color: transparent;
+	border-width: 0;
+	padding: 0;
+}
+/* button is focused */
+#buttonComments:focus {
+	/* reset css wich is applied because its a button */
+	box-shadow: none;
+}
