@@ -1,0 +1,16 @@
+<div jqm>
+	<div data-role="header" data-position="inline">
+		<h1>Stadt</h1>
+		<a href="#/menu" data-role="button" data-icon="bars" data-iconpos="notext" class="ui-btn-right">Menü</a>
+	</div>
+	<div data-role="content">	
+		<ul data-role="listview" data-autodividers="true" data-filter="true" data-filter-placeholder="Länder filtern...">
+			<li ng-repeat="place in places | orderObjectBy: 'name': false">
+				<a href="#/local/country/{{place.identifier}}">
+					<h2>{{place.name}} <span class="ui-li-count">{{place.rating}}*</span></h2>
+					<p>{{place.address}}</p>
+				</a>
+			</li>
+		</ul><!-- /listview -->
+	</div><!-- /content -->
+</div><!-- /page places -->

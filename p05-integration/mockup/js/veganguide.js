@@ -28,15 +28,3 @@ $(document).bind("mobileinit", function(){
 	});
 
 });
-
-/**
- * Page: all
- * Event: on ready
- *
- */
-$(document).ready(function() {
-	//$("#lightGallery").lightGallery(); 
-	$("#lightGallery").lightGallery({ // load light gallery
-		thumbnail            : false, // dont show thumbnails
-	});
-});
