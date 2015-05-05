@@ -1,0 +1,17 @@
+[CountryList|countries:Country]1-0..*[Country|name:string;identifer:string;count:integer;cities:CityList]
+[CountryList]-[note:Used as root{bg:wheat}]
+[Country]++1-1[CityList|cities:City]
+[CityList]1-0..*[City|name:string;identifer:string;count:integer;places:PlaceList]
+[CityList]-[note:Additional List objects are used to separate the things because the API calls may be used not in this order. Can change.{bg:wheat}]
+[City]++1-1[PlaceList|places:Place]
+[PlaceList]1-0..*[Place|name:string;identifer:string;rating:Rating;submitter:string;adress:string;city:string;country:string;coords:Coords;description:string;open:string;contact:Contact;Orientation:OrientationEnum;Photo:boolean;PhotoUrl:string;comments:CommentList]
+[Place]++1-1[Coords|lat:double;lon:double]
+[Place]++1-1[Rating|votes:integer;rating:double]
+[Place]++1-1[Contact|phone:string;fax:string;www:string;email:string]
+[Place]++1-1[OrientationEnum]
+[Place]++1-1[CommentList|comments:Comment]
+[OrientationEnum]-[note:may contain vegan or vegan_freegan or freegan or vegetarian or omnivor{bg:wheat}]
+[CommentList]1-0..*[Comment|submitter:string;date:string;text:string]
+[Comment]-[note:date is a dateTime in ISO8601 format{bg:wheat}]
+
+http://yuml.me/edit/ba4412c0
