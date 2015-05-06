@@ -1,39 +1,24 @@
-ï»¿<?php
+<?php
 /* Parameter
 *
-* Es werden drei Parameter via GET oder POST erwartet
-* 1. city: Default = leipzig
-* 2. country: Default = germany
-* 3. lang: Default = de
+* Es wird ein Parameter via GET oder POST erwartet
+* 1. lang: Default = de
 *
 */
 
 require_once(dirname(__FILE__)."/config/config.inc.php");
-$method = "vg.browse.listPlacesByCity";
+$method = "vg.browse.listCountries";
 
 /* 
 *
 * Parameter setzen 
 *
 */
-$city = (isset($_GET["city"]) ? $_GET["city"] : (isset($_POST["city"]) ? $_POST["city"] : "leipzig"));
-$country = (isset($_GET["country"]) ? $_GET["country"] : (isset($_POST["country"]) ? $_POST["country"] : "germany"));
 $lang = (isset($_GET["lang"]) ? $_GET["lang"] : (isset($_POST["lang"]) ? $_POST["lang"] : "de"));
-$answerparams = array(
-					"rating", 
-					"comments", 
-					"submitter", 
-					"address", 
-					"city", 
-					"country", 
-					"coords");
 
 $data = array(
     "apikey" => $apikey,
-    "lang" => $lang,
-    "city" => $city,
-    "country" => $country,
-    "verbose" => $answerparams
+    "lang" => $lang
 );
 
 /* daten-array in einen xml-query umwandeln */
@@ -52,11 +37,11 @@ $response = file_get_contents($server, false, stream_context_create(
     )
 ));
 
-/* rÃ¼ckgabe von xml in ein array umwandeln */
+/* rückgabe von xml in ein array umwandeln */
 
 $response = xmlrpc_decode($response);
 
-/* Wenn die Antwort einen Fehler enthÃ¤lt loggen */
+/* Wenn die Antwort einen Fehler enthält loggen */
 
 if (xmlrpc_is_fault($response)) 
 {
