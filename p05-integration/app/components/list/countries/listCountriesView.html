@@ -5,7 +5,12 @@
 	</div>
 	<div data-role="content">	
 		<ul data-role="listview" data-autodividers="true" data-filter="true" data-filter-placeholder="Länder filtern...">
-			<li ng-repeat="country in countries | orderObjectBy: 'name': false"><a href="#/local/{{country.identifier}}">{{country.name}} <span class="ui-li-count">{{country.count}}</span></a></li>
+			<li ng-repeat="country in countryList.data | orderObjectBy: 'name': false">
+				<a href="#/local/{{country.identifier}}">
+					{{country.name}} <span class="ui-li-count">{{country.count}}</span>
+				</a>
+			</li>
 		</ul><!-- /listview -->
+		{{countryList}}
 	</div><!-- /content -->
 </div><!-- /page countries -->

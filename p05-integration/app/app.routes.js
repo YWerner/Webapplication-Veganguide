@@ -15,12 +15,12 @@ ngApp.config(['$routeProvider',
 				controller: 'listCountriesController'
 			}).
 			// List of Cities
-			when('/local/:countryIdentifier', {
+			when('/local/:country', {
 				templateUrl: 'app/components/list/cities/listCitiesView.html',
 				controller: 'listCitiesController'
 			}).
 			// List of Places
-			when('/local/:countryIdentifier/:cityIdentifier', {
+			when('/local/:country/:city', {
 				templateUrl: 'app/components/list/places/listPlacesView.html',
 				controller: 'listPlacesController'
 			}).

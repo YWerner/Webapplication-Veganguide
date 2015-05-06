@@ -1,9 +1,21 @@
 /**
- * Controller for the Country List page
+ * Controller for the Country List page.
+ * 
+ * @class app.countries.listCountriesController
+ * @memberOf app.countries
  */
 
-ngApp.controller('listCountriesController',function($scope, $http, $filter){
-	$http.get('api/JSON_Dummies/Countries.json').success (function(result){ // Load countries using a API-call wich returns JSOn data
-		$scope.countries = result.data; // put list of countries into scope
-	});
-});
+/**
+ * Factory to create the controller.
+ * 
+ * @function factory
+ * @memberOf app.countries.listCountriesController
+ * @param {string} Controller name
+ * @param {fn} Controller function
+ * @param {object} $scope
+ * @param {object} CountryList model
+ */
+ 
+ngApp.controller('listCountriesController', ['$scope', 'CountryList', function($scope, CountryList) {
+	$scope.countryList = new CountryList(); // get the CountryList model
+}]);
