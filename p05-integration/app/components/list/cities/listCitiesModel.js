@@ -4,7 +4,7 @@
  *
  * @class app.cities.CityList
  * @memberOf app.cities
- * @example var CityList = new CityList();
+ * @example var CityList = new CityList('germany');
  */
 
 /**
@@ -39,7 +39,6 @@ ngApp.factory('CityList', ['apiService', '$filter', function(apiService, $filter
 		 * @function load
 		 * @memberOf app.CityList
 		 * @param {string} country - Cities should be in this country
-		 * @example CityList.load('germany'); $scope.cities = CityList.data;
 		 */
 		this.load = function(country) {
 			var self = this; // to reach 'this' in the callback

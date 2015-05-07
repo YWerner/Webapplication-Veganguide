@@ -1,12 +1,13 @@
 <div jqm>
 	<div data-role="header" data-position="inline">
-		<h1>Stadt</h1>
+		<a href="#/local/{{countryId}}" role="button" data-icon="arrow-l" data-iconpos="notext" class="ui-btn-left">Zurück</a>
+		<h1>{{placeList.data[0].city}}</h1>
 		<a href="#/menu" data-role="button" data-icon="bars" data-iconpos="notext" class="ui-btn-right">Menü</a>
 	</div>
 	<div data-role="content">	
-		<ul data-role="listview" data-autodividers="true" data-filter="true" data-filter-placeholder="Länder filtern...">
-			<li ng-repeat="place in places | orderObjectBy: 'name': false">
-				<a href="#/local/country/{{place.identifier}}">
+		<ul data-role="listview" data-autodividers="true" data-filter="true" data-filter-placeholder="Lokale filtern...">
+			<li ng-repeat="place in placeList.data | orderObjectBy: 'name': false">
+				<a href="#/place/{{place.identifier}}">
 					<h2>{{place.name}} <span class="ui-li-count">{{place.rating}}*</span></h2>
 					<p>{{place.address}}</p>
 				</a>

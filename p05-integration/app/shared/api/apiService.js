@@ -2,7 +2,7 @@
  * Service for communication with the API.
  *  
  * @class app.api.apiService
- * @memberOf app
+ * @memberOf app.api
  * @example apiService.listCountries(function(response) { var countries = response.data });	
  */
 
@@ -66,6 +66,21 @@ ngApp.factory('apiService', ['$http', function($http) {
 		listCities: function(country, callback) {
 			$http.get('api/JSON_Dummies/Cities_Germany.json').success(callback);
 			//$http.get(this.url + "?apikey=" + this.apikey + "&lang=" + this.lang + "&country=" + country).success(callback);
+		},
+
+		/**
+		 * Executes a callback with a list of all places as parameter
+		 *
+		 * @function listPlacesByCity
+		 * @memberOf app.api.apiService
+		 * @see {@link http://veganguide.org/api|vg.browse.listCities}
+		 * @param {string} country - Cities should be in this country
+		 * @param {string} city - Cities should be in this city
+		 * @param {fn} callback - Function to execute
+		 */
+		listPlacesByCity: function(country, city, callback) {
+			$http.get('api/JSON_Dummies/Lokale_Leipzig.json').success(callback);
+			//$http.get(this.url + "?apikey=" + this.apikey + "&lang=" + this.lang + "&country=" + country + "&city=" + city).success(callback);
 		}
 	};
 }]);
