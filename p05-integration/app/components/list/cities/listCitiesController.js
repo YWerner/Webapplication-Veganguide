@@ -24,9 +24,4 @@ ngApp.controller('listCitiesController', ['$scope', '$filter', '$routeParams', '
 	$scope.cityList = new CityList($routeParams.country); // get the CityList model
 	$scope.countryList = new CountryList(); // get the CountryList model
 	$scope.country = $routeParams.country;
-	/*
-	$http.get('api/JSON_Dummies/Cities_Germany.json').success (function(result){ // Load Cities using a API-call wich returns JSOn data
-		$scope.cities = result.data; // put list of Cities into scope
-	});
-	*/
 }]);

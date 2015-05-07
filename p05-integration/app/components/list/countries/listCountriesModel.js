@@ -58,10 +58,11 @@ ngApp.factory('CountryList', ['apiService', '$filter', function(apiService, $fil
 		 */
 		this.getById = function(id) {
 			var country = {}; // default result
-			if(this.data) { // data is not null
+			if(this.data) { // data is defined
 				for (var i = 0, len = this.data.length; i < len; i++) { // loop
-					if (this.data[i].name === id) { // match the searched id
-						country = this.data[i].name; // store to result
+					country = this.data[i];
+					if (this.data[i].identifier === id) { // match the searched id
+						country = this.data[i]; // store to result
 						break; // exit loop
 					}
 				}
