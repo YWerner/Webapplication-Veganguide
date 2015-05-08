@@ -5,8 +5,8 @@
 		<a href="#/menu" data-role="button" data-icon="bars" data-iconpos="notext" class="ui-btn-right">Menü</a>
 	</div>
 	<div data-role="content">	
-		<ul list-view data-watch="placeList.data" data-role="listview" data-autodividers="true" data-filter="true" data-filter-placeholder="Lokale filtern...">
-			<li ng-repeat="place in placeList.data | orderObjectBy: 'name': false">
+		<ul data-role="listview" data-autodividers="true" data-filter="true" data-filter-placeholder="Lokale filtern...">
+			<li ng-repeat="place in placeList.data | orderObjectBy: 'name': false" refresh-list>
 				<a href="#/place/{{place.identifier}}">
 					<h2>{{place.name}} <span class="ui-li-count">{{place.rating}}*</span></h2>
 					<p>{{place.address}}</p>

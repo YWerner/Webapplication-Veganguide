@@ -11,31 +11,45 @@ ngApp.directive('jqm', function($timeout) {
   };
 });
 
-ngApp.directive('listView', function () {
-	var link=function(scope, element, attrs) {
-		$(element).listview();
-		scope.$watchCollection(attrs.watch, function() {
-			$(element).listview({
-				autodividers: true,
-				autodividersSelector: function (elt) {
-					// look for the text in the given element
-					var text = $.trim( elt.text() ) || null;
-					if ( !text ) {
-						return null;
+/**
+ * Directive for refreshing a Listview after finishing a ng-repeat
+ * Based on the code of Ben Nadel
+ * 
+ * @returns DOM compilation
+ * @example <li ng-repeat="country in countryList.data" refresh-list>
+ * @see {@link http://www.bennadel.com/blog/2592-hooking-into-the-complete-event-of-an-ngrepeat-loop-in-angularjs.htm|Ben Nadel} 
+ */
+ngApp.directive(
+	"refreshList",
+	function( $rootScope ) {
+		var uuid = 0;
+		function compile( tElement, tAttributes ) {
+			var id = ++uuid;
+			tElement.attr( "repeat-complete-id", id );
+			tElement.removeAttr( "repeat-complete" );
+			var parent = tElement.parent();
+			var parentScope = ( parent.scope() || $rootScope );
+			var unbindWatcher = parentScope.$watch(
+				function() {
+					var lastItem = parent.children( "*[ repeat-complete-id = '" + id + "' ]:last" );
+					if ( ! lastItem.length ) {
+						return;
 					}
-					// create the text for the divider (first uppercased letter)
-					text = text.slice( 0, 1 ).toUpperCase();
-					return text;
+					var itemScope = lastItem.scope();
+					if ( itemScope.$last ) {
+						unbindWatcher();
+						parent.listview().listview("refresh");
+					}
 				}
-			}).listview("refresh");
-    	});
-	};
-	return {
-		restrict: 'A',
-		scope:false,
-		link: link
-	};
-});
+			);
+		}
+		return({
+			compile: compile,
+			priority: 1001,
+			restrict: "A"
+		});
+	}
+);
 
 /**
  * JQuery Mobile config 

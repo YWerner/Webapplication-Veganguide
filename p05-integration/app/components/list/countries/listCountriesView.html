@@ -4,8 +4,9 @@
 		<a href="#/menu" data-role="button" data-icon="bars" data-iconpos="notext" class="ui-btn-right">Menü</a>
 	</div>
 	<div data-role="content">	
-		<ul list-view data-watch="countryList.data" data-role="listview" data-filter="true" data-filter-placeholder="Länder filtern...">
-			<li ng-repeat="country in countryList.data | orderObjectBy: 'name': false">
+		<!--<ul list-view data-watch="countryList.data" data-role="listview" data-filter="true" data-filter-placeholder="Länder filtern...">-->
+		<ul data-autodividers="true" data-role="listview" data-filter="true" data-filter-placeholder="Länder filtern...">
+			<li ng-repeat="country in countryList.data | orderObjectBy: 'name': false" refresh-list>
 				<a href="#/local/{{country.identifier}}">
 					{{country.name}} <span class="ui-li-count">{{country.count}}</span>
 				</a>
