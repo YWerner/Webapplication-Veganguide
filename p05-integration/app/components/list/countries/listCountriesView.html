@@ -4,13 +4,12 @@
 		<a href="#/menu" data-role="button" data-icon="bars" data-iconpos="notext" class="ui-btn-right">Menü</a>
 	</div>
 	<div data-role="content">	
-		<ul data-role="listview" data-autodividers="true" data-filter="true" data-filter-placeholder="Länder filtern...">
+		<ul list-view data-watch="countryList.data" data-role="listview" data-filter="true" data-filter-placeholder="Länder filtern...">
 			<li ng-repeat="country in countryList.data | orderObjectBy: 'name': false">
 				<a href="#/local/{{country.identifier}}">
 					{{country.name}} <span class="ui-li-count">{{country.count}}</span>
 				</a>
 			</li>
 		</ul><!-- /listview -->
-		{{countryList}}
 	</div><!-- /content -->
 </div><!-- /page countries -->

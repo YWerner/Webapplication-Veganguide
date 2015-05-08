@@ -5,7 +5,7 @@
 		<a href="#/menu" data-role="button" data-icon="bars" data-iconpos="notext" class="ui-btn-right">Menü</a>
 	</div>
 	<div data-role="content">	
-		<ul data-role="listview" data-autodividers="true" data-filter="true" data-filter-placeholder="Städte filtern...">
+		<ul list-view data-watch="cityList.data" data-role="listview" data-autodividers="true" data-filter="true" data-filter-placeholder="Städte filtern...">
 			<li ng-repeat="city in cityList.data | orderObjectBy: 'name': false">
 				<a href="#/local/{{country}}/{{city.identifier}}">
 					{{city.name}} <span class="ui-li-count">{{city.count}}</span>

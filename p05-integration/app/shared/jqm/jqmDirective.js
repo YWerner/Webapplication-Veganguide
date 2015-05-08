@@ -6,8 +6,22 @@ ngApp.directive('jqm', function($timeout) {
     link: function(scope, elm, attr) {
         $timeout(function(){
             elm.trigger('create');
-        }, 100);
+        }, 0);
     }
+  };
+});
+
+ngApp.directive('listView', function () {
+  var link=function(scope, element, attrs) {
+    $(element).listview();
+    scope.$watchCollection(attrs.watch, function() {
+      $(element).listview("refresh");
+    });
+  };
+  return {
+    restrict: 'EA',
+    scope:false,
+    link: link
   };
 });
 
