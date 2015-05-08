@@ -12,17 +12,29 @@ ngApp.directive('jqm', function($timeout) {
 });
 
 ngApp.directive('listView', function () {
-  var link=function(scope, element, attrs) {
-    $(element).listview();
-    scope.$watchCollection(attrs.watch, function() {
-      $(element).listview("refresh");
-    });
-  };
-  return {
-    restrict: 'EA',
-    scope:false,
-    link: link
-  };
+	var link=function(scope, element, attrs) {
+		$(element).listview();
+		scope.$watchCollection(attrs.watch, function() {
+			$(element).listview({
+				autodividers: true,
+				autodividersSelector: function (elt) {
+					// look for the text in the given element
+					var text = $.trim( elt.text() ) || null;
+					if ( !text ) {
+						return null;
+					}
+					// create the text for the divider (first uppercased letter)
+					text = text.slice( 0, 1 ).toUpperCase();
+					return text;
+				}
+			}).listview("refresh");
+    	});
+	};
+	return {
+		restrict: 'A',
+		scope:false,
+		link: link
+	};
 });
 
 /**
