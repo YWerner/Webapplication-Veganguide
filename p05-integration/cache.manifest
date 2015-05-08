@@ -1,0 +1,36 @@
+CACHE MANIFEST
+# rev 20150705-2055
+
+CACHE:
+assets/css/veganguide.css
+assets/lib/jquery-1.11.1.min.js
+assets/lib/jquery.mobile-1.4.5.min.css
+assets/lib/jquery.mobile-1.4.5.min.js
+assets/lib/ng-order-object-by.js
+assets/lib/angular.min.js
+assets/lib/angular-route.min.js
+assets/themes/jquery.mobile.icons.min.css
+assets/themes/veganguide.min.css
+assets/themes/images/icons-18-black.png
+assets/themes/images/icons-18-white.png
+assets/themes/images/icons-36-black.png
+assets/themes/images/icons-36-white.png
+app/app.module
+app/app.routes
+app/shared/jqm/jqmDirective
+app/shared/filter/uniqueFilter
+app/shared/filter/noFaultyFilter
+app/shared/api/apiService
+app/components/menu/menuController
+app/components/list/countries/listCountriesModel
+app/components/list/countries/listCountriesController
+app/components/list/cities/listCitiesModel
+app/components/list/cities/listCitiesController
+app/components/list/places/listPlacesModel
+app/components/list/places/listPlacesController
+api/JSON_Dummies/Cities_Germany.json
+api/JSON_Dummies/Countries.json
+api/JSON_Dummies/Lokale_Leipzig.json
+
+NETWORK:
+*
