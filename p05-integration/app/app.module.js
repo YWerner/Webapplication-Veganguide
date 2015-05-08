@@ -4,4 +4,4 @@
  * Dependencies: 
  *  - ngRoute 
  */
-var ngApp = angular.module('app', ['ngRoute', 'ngOrderObjectBy']);
+var ngApp = angular.module('app', ['ngRoute', 'ngAnimate', 'ngOrderObjectBy']);
