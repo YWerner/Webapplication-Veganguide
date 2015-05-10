@@ -13,10 +13,55 @@
  * @memberOf app.api.apiService
  * @param {string} Service name
  * @param {fn} Service function
- * @param {object} $http
+ * @param {$http} $http - Angulars $http object
+ * @param {$localStorage} $localStorage - Interface to the local storage
  */
 
-ngApp.factory('apiService', ['$http', function($http) {
+ngApp.factory('apiService', ['$http', '$localStorage',function($http, $localStorage) {
+
+	/**
+	 * Expiration  time in seconds for each API function.
+	 * 
+	 * @var {object} expirationTime - Expiration time
+	 * @memberOf app.api.apiService
+	 * @private
+	 */
+	var expirationTime = {
+		listCountries: 60,
+		listCities: 60,
+		listPlacesByCity: 60,
+	};
+
+	/**
+	 * If url in localStorage and not expired return this data,
+	 * else get data using $http request.
+	 * 
+	 * @private
+	 * @function get
+	 * @memberOf app.api.apiService
+	 * @param {string} URL
+	 * @returns
+	 */
+	var get = function(url, fn, callback) {
+		$localStorage.$reset();
+		var now = new Date(); // current date and time
+		if(!$localStorage[fn] // not cached before
+			||  (now - Date.parse($localStorage[fn].loadTime)) / 1000 > expirationTime[fn]) { // cache expired because: now - loadTime > expirationTime
+			$http.get(url).success(function(data) { // get using $http, execute a function
+				data.loadTime = now; // now loaded
+				$localStorage[fn] = data; // store to localStorage
+			}).error(function(data, status) { // failed to get data
+				$localStorage[fn] = { // fallback
+						data: {}, // no data
+						loadTime: undefined, // undefined load time
+						status: status // error status
+				};
+			});
+		}
+		// at least now: data is cached
+		callback($localStorage[fn]); // execute callback with data from cache and cache time	
+	};
+
 	return {
 		/**
 		 * URL to the API
@@ -50,8 +95,8 @@ ngApp.factory('apiService', ['$http', function($http) {
 		 * @param {fn} callback - Function to execute
 		 */
 		listCountries: function(callback) {
-			$http.get('api/JSON_Dummies/Countries.json').success(callback);
-			//$http.get(this.url + "?apikey=" + this.apikey + "&lang=" + this.lang).success(callback);
+			get('api/JSON_Dummies/Countries.json', 'listCountries', callback);
+			///get(this.url + "?apikey=" + this.apikey + "&lang=" + this.lang, 'listCountries', callback);
 		},
 
 		/**
@@ -64,8 +109,8 @@ ngApp.factory('apiService', ['$http', function($http) {
 		 * @param {fn} callback - Function to execute
 		 */
 		listCities: function(country, callback) {
-			$http.get('api/JSON_Dummies/Cities_Germany.json').success(callback);
-			//$http.get(this.url + "?apikey=" + this.apikey + "&lang=" + this.lang + "&country=" + country).success(callback);
+			get('api/JSON_Dummies/Cities_Germany.json', 'listCities', callback);
+			//get('this.url + "?apikey=" + this.apikey + "&lang=" + this.lang + "&country=" + country', 'listCities', callback);
 		},
 
 		/**
@@ -79,8 +124,8 @@ ngApp.factory('apiService', ['$http', function($http) {
 		 * @param {fn} callback - Function to execute
 		 */
 		listPlacesByCity: function(country, city, callback) {
-			$http.get('api/JSON_Dummies/Lokale_Leipzig.json').success(callback);
-			//$http.get(this.url + "?apikey=" + this.apikey + "&lang=" + this.lang + "&country=" + country + "&city=" + city).success(callback);
+			get('api/JSON_Dummies/Lokale_Leipzig.json', 'listPlacesByCity',  callback);
+			//get(this.url + "?apikey=" + this.apikey + "&lang=" + this.lang + "&country=" + country + "&city=" + city',  callback);
 		}
 	};
 }]);

@@ -1,5 +1,5 @@
 CACHE MANIFEST
-# rev 20150805-2155
+# rev 20150511-0036
 
 CACHE:
 assets/css/veganguide.css
@@ -11,6 +11,7 @@ assets/lib/angular.min.js
 assets/lib/angular-route.min.js
 assets/lib/angular-animate.min.js
 assets/lib/ng-order-object-by.js
+assets/lib/ngStorage.min.js
 assets/lib/ng-transitions.css
 assets/themes/jquery.mobile.icons.min.css
 assets/themes/veganguide.min.css
@@ -19,9 +20,6 @@ assets/themes/images/icons-18-white.png
 assets/themes/images/icons-36-black.png
 assets/themes/images/icons-36-white.png
 assets/themes/images/ajax-loader.gif
-api/JSON_Dummies/Cities_Germany.json
-api/JSON_Dummies/Countries.json
-api/JSON_Dummies/Lokale_Leipzig.json
 assets/css/veganguide.css
 assets/themes/veganguide.min.css
 assets/themes/jquery.mobile.icons.min.css
