@@ -43,23 +43,27 @@ ngApp.factory('apiService', ['$http', '$localStorage',function($http, $localStor
 	 * @returns
 	 */
 	var get = function(url, fn, callback) {
-		$localStorage.$reset();
 		var now = new Date(); // current date and time
 		if(!$localStorage[fn] // not cached before
-			||  (now - Date.parse($localStorage[fn].loadTime)) / 1000 > expirationTime[fn]) { // cache expired because: now - loadTime > expirationTime
-			$http.get(url).success(function(data) { // get using $http, execute a function
+			|| !$localStorage[fn].loadTime // or: loadTime invalid
+			||  (now - Date.parse($localStorage[fn].loadTime)) / 1000 > expirationTime[fn]) { // or: cache expired because: now - loadTime > expirationTime
+			$http.get(url).success(function(data, status) { // get using $http, execute a function
 				data.loadTime = now; // now loaded
 				$localStorage[fn] = data; // store to localStorage
+				callback($localStorage[fn]); // execute callback with data from cache and cache time
 			}).error(function(data, status) { // failed to get data
-				$localStorage[fn] = { // fallback
-						data: {}, // no data
-						loadTime: undefined, // undefined load time
-						status: status // error status
-				};
+				if(!$localStorage[fn]) { // nothing set
+					$localStorage[fn] = { // fallback
+							data: {}, // no data
+							loadTime: undefined, // undefined load time
+							status: status // error status
+					};
+				} // else: use old data
+				callback($localStorage[fn]); // execute callback with fallback data from cache
 			});
-		}
-		// at least now: data is cached
-		callback($localStorage[fn]); // execute callback with data from cache and cache time	
+		} else { // cached and is up to date
+			callback($localStorage[fn]); // execute callback with data from cache and cache time
+		}		
 	};
 
 	return {

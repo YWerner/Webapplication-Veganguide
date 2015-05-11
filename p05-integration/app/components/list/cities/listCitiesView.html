@@ -1,7 +1,7 @@
 <div jqm>
 	<div data-role="header" data-position="inline">
 		<a href="#/local" role="button" data-icon="arrow-l" data-iconpos="notext" class="ui-btn-left">Zurück</a>
-		<h1>{{countryList.getById(country).name}}</h1>
+		<h1>{{countryList.getById(country).name || "Städe"}}</h1>
 		<a href="#/menu" data-role="button" data-icon="bars" data-iconpos="notext" class="ui-btn-right">Menü</a>
 	</div>
 	<div data-role="content">	
