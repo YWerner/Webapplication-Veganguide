@@ -19,6 +19,7 @@
  */
 ngApp.factory('CityList', ['apiService', '$filter', function(apiService, $filter) {
 	var CityList = function(country) {
+
 		/**
 		 * Constructor. 
 		 * Use load() to fetch the cities.
@@ -52,7 +53,7 @@ ngApp.factory('CityList', ['apiService', '$filter', function(apiService, $filter
 		/**
 		 * Call constructor. 
 		 */
-		this.initialize();
+		this.initialize(country);
 	};
 	return (CityList);
 }]);

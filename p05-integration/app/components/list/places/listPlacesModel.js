@@ -63,7 +63,7 @@ ngApp.factory('PlaceList', ['apiService', '$filter', function(apiService, $filte
 		/**
 		 * Call constructor. 
 		 */
-		this.initialize();
+		this.initialize(country, city);
 	};
 	return (PlaceList);
 }]);

@@ -44,25 +44,25 @@ ngApp.factory('apiService', ['$http', '$localStorage',function($http, $localStor
 	 */
 	var get = function(url, fn, callback) {
 		var now = new Date(); // current date and time
-		if(!$localStorage[fn] // not cached before
-			|| !$localStorage[fn].loadTime // or: loadTime invalid
-			||  (now - Date.parse($localStorage[fn].loadTime)) / 1000 > expirationTime[fn]) { // or: cache expired because: now - loadTime > expirationTime
+		if(!$localStorage[url] // not cached before
+			|| !$localStorage[url].loadTime // or: loadTime invalid
+			||  (now - Date.parse($localStorage[url].loadTime)) / 1000 > expirationTime[fn]) { // or: cache expired because: now - loadTime > expirationTime
 			$http.get(url).success(function(data, status) { // get using $http, execute a function
 				data.loadTime = now; // now loaded
-				$localStorage[fn] = data; // store to localStorage
-				callback($localStorage[fn]); // execute callback with data from cache and cache time
+				$localStorage[url] = data; // store to localStorage
+				callback($localStorage[url]); // execute callback with data from cache and cache time
 			}).error(function(data, status) { // failed to get data
-				if(!$localStorage[fn]) { // nothing set
-					$localStorage[fn] = { // fallback
+				if(!$localStorage[url]) { // nothing set
+					$localStorage[url] = { // fallback
 							data: {}, // no data
 							loadTime: undefined, // undefined load time
 							status: status // error status
 					};
 				} // else: use old data
-				callback($localStorage[fn]); // execute callback with fallback data from cache
+				callback($localStorage[url]); // execute callback with fallback data from cache
 			});
 		} else { // cached and is up to date
-			callback($localStorage[fn]); // execute callback with data from cache and cache time
+			callback($localStorage[url]); // execute callback with data from cache and cache time
 		}		
 	};
 
@@ -118,8 +118,8 @@ ngApp.factory('apiService', ['$http', '$localStorage',function($http, $localStor
 		 * @param {fn} callback - Function to execute
 		 */
 		listCountries: function(callback) {
-			get('api/JSON_Dummies/Countries.json', 'listCountries', callback);
-			///get(this.url + '?apikey=' + this.apikey + '&lang=' + this.lang, 'listCountries', callback);
+			//get('api/JSON_Dummies/Countries.json', 'listCountries', callback);
+			get('api/veganguide/local/' + safe(this.lang), 'listCountries', callback);
 		},
 
 		/**
@@ -132,8 +132,8 @@ ngApp.factory('apiService', ['$http', '$localStorage',function($http, $localStor
 		 * @param {fn} callback - Function to execute
 		 */
 		listCities: function(country, callback) {
-			get('api/JSON_Dummies/Cities_Germany.json', 'listCities', callback);
-			//get(this.url + '?apikey=' + this.apikey + '&lang=' + this.lang + '&country=' + safe(country), 'listCities', callback);
+			//get('api/JSON_Dummies/Cities_Germany.json', 'listCities', callback);
+			get('api/veganguide/local/' + safe(this.lang) + '/country/' + safe(country), 'listCities', callback);
 		},
 
 		/**
@@ -147,8 +147,8 @@ ngApp.factory('apiService', ['$http', '$localStorage',function($http, $localStor
 		 * @param {fn} callback - Function to execute
 		 */
 		listPlacesByCity: function(country, city, callback) {
-			get('api/JSON_Dummies/Lokale_Leipzig.json', 'listPlacesByCity',  callback);
-			//get(this.url + '?apikey=' + this.apikey + '&lang=' + this.lang + '&country=' + safe(country) + '&city=' + safe(city),  callback);
+			//get('api/JSON_Dummies/Lokale_Leipzig.json', 'listPlacesByCity',  callback);
+			get('api/veganguide/local/' + safe(this.lang) + '/country/' + safe(country) + '/city/' + safe(city), 'listPlacesByCity',  callback);
 		}
 	};
 }]);
