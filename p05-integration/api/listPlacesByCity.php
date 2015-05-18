@@ -1,19 +1,12 @@
 ﻿<?php
-/* Parameter
-*
-* Es werden drei Parameter via GET oder POST erwartet
-* 1. city: Default = leipzig
-* 2. country: Default = germany
-* 3. lang: Default = de
-*
-*/
-
 require_once(dirname(__FILE__)."/config/config.inc.php");
 $method = "vg.browse.listPlacesByCity";
 
-/* 
+/* Parameter setzen 
 *
-* Parameter setzen 
+* Default city = leipzig
+* Default country = germany
+* Default lang = de
 *
 */
 $city = (isset($_GET["city"]) ? $_GET["city"] : (isset($_POST["city"]) ? $_POST["city"] : "leipzig"));
@@ -72,11 +65,35 @@ else
 {
 /*
 *
+* Einen Array bilden mit den nötigen Informationen
+*
+*
+*/
+	$filialen;
+	$index=0;
+	foreach($response["data"] as $x => $eintrag)
+	{
+		$filiale=array(
+			'identifier' => $eintrag['identifier'],
+			'name' => $eintrag['name'],
+			'rating' => $eintrag['verbose']['rating'],
+			'submitter' => $eintrag['verbose']['submitter'],
+			'address' => $eintrag['verbose']['address'],
+			'city' => $eintrag['verbose']['city'],
+			'country' => $eintrag['verbose']['country'],
+			'latitude' => $eintrag['verbose']['coords']['lat'],
+			'longitude' => $eintrag['verbose']['coords']['lon']
+		);
+		$filialen[$index]=$filiale;
+		$index++;
+	}
+/*
+*
 *
 * Array als JSON encoden
 *
 */
-	echo json_encode($response);
+	echo json_encode($filialen);
 }
 
 ?>
