@@ -1,18 +1,12 @@
-/**
- * Filter to delete entires in an array of objects by a key when they seems to be faulty.
- *
- * @class app.filter.noFaultyFilter
- * @memberOf app.filter
- */
 
 /**
- * Factory to create the filter.
+ * @ngdoc filter
+ * @name app.api.noFaulty
+ * @description
+ * Filter to delete entries in an array of objects by a key when they seems to be faulty.
  * 
- * @function filter
- * @memberOf app.filter.noFaultyFilter
- * @param {string} Filter name
- * @param {fn} Filter function
- * @returns {fn} Filter
+ * @param {object} collection - data which gets manipulated
+ * @param {string} key - only look in this property of any child  object
  */
 ngApp.filter('noFaulty', function() {
 	return function(collection, keyname) {

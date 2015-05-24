@@ -1,23 +1,22 @@
-/**
+ /**
+ * @ngdoc controller
+ * @name listPlacesController
+ * @description
  * Controller for the Place list page.
  * 
- * @class app.list.places.listCitiesController
- * @memberOf app.list.cities
- */
-
-/**
- * Factory to create the controller.
- * 
- * @function factory
- * @memberOf app.list.places.listCitiesController
  * @param {string} Controller name
- * @param {fn} Controller function
  * @param {object} $scope
+ * @param {object} $rootScope
  * @param {object} $filter
  * @param {object} $routeParams
- * @param {PlaceList} PlaceList model
- */ 
-ngApp.controller('listPlacesController', ['$scope', '$filter', '$routeParams', 'PlaceList', function($scope, $filter, $routeParams, PlaceList){
-	$scope.placeList = new PlaceList($routeParams.country, $routeParams.city); // get the PlaceList model
-	$scope.countryId = $routeParams.country;
+ * @param {object} PlaceList model
+ * @param {fn} Factory function with any parameter defined so far
+ */
+ngApp.controller('listPlacesController', ['$scope', '$rootScope', '$filter', '$routeParams', 'PlaceList', function($scope, $rootScope, $filter, $routeParams, PlaceList){
+	$scope.countryId = $routeParams.country; // get countryId from url
+	$rootScope.pageBack = "#/local/" + $scope.countryId; // set back link to the list of citys in the current country
+	$scope.placeList = new PlaceList($scope.countryId, $routeParams.city); // get the PlaceList model
+	$scope.$watch('placeList.data', function(value) {  // watch for changes on the data of placeList
+		$rootScope.pageTitle = $scope.placeList.getCity(); // change page title to the current city
+	});
 }]);

@@ -1,6 +1,13 @@
 /* Custom CSS for the mobile vegan guide app */
 
 /*
+ * General
+ */
+div.ui-content {
+	padding-top: 5px; /* after the header there are just 5px of space before the content begins
+}
+
+/*
  * Page: New places
  */
 

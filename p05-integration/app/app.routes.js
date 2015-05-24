@@ -4,11 +4,6 @@
 ngApp.config(['$routeProvider',
 	function($routeProvider) {
 		$routeProvider.
-			// Menu
-			when('/menu', {
-				templateUrl: 'app/components/menu/menuView.html',
-				controller: 'menuController',
-			}).
 			// List of Countries
 			when('/local', {
 				templateUrl: 'app/components/list/countries/listCountriesView.html',
@@ -26,6 +21,6 @@ ngApp.config(['$routeProvider',
 			}).
 			// Default
 			otherwise({
-				redirectTo: '/menu'
+				redirectTo: '/local'
 			});
   }]);

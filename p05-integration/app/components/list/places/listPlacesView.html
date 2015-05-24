@@ -1,17 +1,8 @@
-<div jqm>
-	<div data-role="header" data-position="inline">
-		<a href="#/local/{{countryId}}" role="button" data-icon="arrow-l" data-iconpos="notext" class="ui-btn-left">Zurück</a>
-		<h1>{{placeList.data[0].city || "Lokale"}}</h1>
-		<a href="#/menu" data-role="button" data-icon="bars" data-iconpos="notext" class="ui-btn-right">Menü</a>
-	</div>
-	<div data-role="content">	
-		<ul data-role="listview" data-autodividers="true" data-filter="true" data-filter-placeholder="Lokale filtern...">
-			<li ng-repeat="place in placeList.data | orderObjectBy: 'name': false" refresh-list>
-				<a href="#/place/{{place.identifier}}">
-					<h2>{{place.name}} <span class="ui-li-count" ng-if="place.verbose.rating">{{place.verbose.rating}}*</span></h2>
-					<p>{{place.verbose.address}}</p>
-				</a>
-			</li>
-		</ul><!-- /listview -->
-	</div><!-- /content -->
-</div><!-- /page places -->
+<ul data-role="listview" data-autodividers="true" data-filter="true" data-filter-placeholder="Lokale filtern...">
+	<li ng-repeat="place in placeList.data | orderObjectBy: 'name': false" refresh-list>
+		<a href="#/place/{{::place.identifier}}" menu-remember="list">
+			<h2>{{::place.name}} <span class="ui-li-count" ng-if="::place.verbose.rating">{{::place.verbose.rating}}*</span></h2>
+			<p>{{::place.verbose.address}}</p>
+		</a>
+	</li>
+</ul><!-- /listview -->

@@ -1,58 +1,66 @@
 /**
+ * @ngdoc service
+ * @name app.list.countries.CountryList
+ * @description
  * Data model for the country list.
- * Works as services and use
- *
- * @class app.countries.CountryList
- * @memberOf app.countries
- * @example var countryList = new CountryList();
- */
-
-/**
- * Factory to create the model.
+ * Works as services.
+ * Is created by a self-named factory.
  * 
- * @function factory
- * @memberOf app.countries.CountryList
  * @param {string} Service name
  * @param {string} apiService
- * @param {fn} Factory function
- * @returns {object} CountryList 
+ * @param {object} $filter
+ * @param {fn} Factory function with any parameter defined so far
+ * @returns {object} PlaceList 
  */
 ngApp.factory('CountryList', ['apiService', '$filter', function(apiService, $filter) {
+
+	/**
+	 * @ngdoc function
+	 * @name CountryList
+	 * @methodOf app.list.countries.CountryList
+	 * @description
+	 * Factory to create a CountryList.
+	 * Creates the object and load the data using the API.
+	 *
+	 * @returns {object} CountryList
+	 */
 	var CountryList = function() {
+
 		/**
+		 * @ngdoc method
+		 * @name initialize
+		 * @methodOf app.list.countries.CountryList
+		 * @description
 		 * Constructor. 
 		 * Use load() to fetch the countries.
-		 * 
-		 * @function initialize
-		 * @memberOf app.countries.CountryList
 		 */
 		this.initialize = function() {
 			this.load();
 		};
 
 		/**
+		 * @ngdoc method
+		 * @name load
+		 * @methodOf app.list.countries.CountryList
+		 * @description
 		 * Load the country list using the API.
 		 * Does also some changes to the data (duplicates get discarded and so on).
-		 * Extends the object so that the data is in countryList.data
-		 * 
-		 * @function load
-		 * @memberOf app.countries..CountryList
-		 * @example countryList.load(); $scope.countries = countryList.data;
+		 * Extends the object so that the data is in CityList.data
 		 */
 		this.load = function() {
 			var self = this; // to reach 'this' in the callback
 			apiService.listCountries(function(response) { // get data using api
-				response.data = $filter('unique')(response.data, 'name'); // discarded duplicate entries by name
-				response.data = $filter('noFaulty')(response.data, 'name'); // discard entries beginning with a '!'
 				angular.extend(self, response); // inject data back
 			});	
 		};
 
-		/**
-		 * Returns a country by identifier
-		 * 
-		 * @function getById
-		 * @memberOf app.countries.CountryList
+		/** 
+		 * @ngdoc method
+		 * @name getById
+		 * @methodOf app.list.countries.CountryList
+		 * @description
+		 * Returns a country by his identifier.
+		 *
 		 * @param {string} id - Identifier of the Country
 		 * @returns {object} country - Country object
 		 */

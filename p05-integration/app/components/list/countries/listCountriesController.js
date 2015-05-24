@@ -1,21 +1,17 @@
-/**
- * Controller for the Country List page.
+ /**
+ * @ngdoc controller
+ * @name listCountriesController
+ * @description
+ * Controller for the Country list page.
  * 
- * @class app.countries.listCountriesController
- * @memberOf app.countries
- */
-
-/**
- * Factory to create the controller.
- * 
- * @function factory
- * @memberOf app.countries.listCountriesController
  * @param {string} Controller name
- * @param {fn} Controller function
  * @param {object} $scope
- * @param {object} CountryList model
+ * @param {object} $rootScope
+ * @param {PlaceList} CountryList model
+ * @param {fn} Factory function with any parameter defined so far
  */
- 
-ngApp.controller('listCountriesController', ['$scope', 'CountryList', function($scope, CountryList) {
+ngApp.controller('listCountriesController', ['$scope', '$rootScope', 'CountryList', function($scope, $rootScope, CountryList) {
+	$rootScope.pageTitle = "Alle Orte"; // set page tilte
+	$rootScope.pageBack = ""; // set no back link in the header
 	$scope.countryList = new CountryList(); // get the CountryList model
 }]);
