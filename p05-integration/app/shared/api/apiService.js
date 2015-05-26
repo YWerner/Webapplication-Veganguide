@@ -26,6 +26,8 @@ ngApp.factory('apiService', ['$http', '$localStorage', '$filter', function($http
 		listCountries: 600,
 		listCities: 600,
 		listPlacesByCity: 600,
+		getInfo: 600,
+		getComments: 600
 	};
 
 	/** 
@@ -211,6 +213,51 @@ ngApp.factory('apiService', ['$http', '$localStorage', '$filter', function($http
 					return data;
 				}
 			);
+		},
+
+		/** 
+		 * @ngdoc method
+		 * @name getInfo
+		 * @methodOf app.api.apiService
+		 * @description
+		 * Executes a callback with all data of a place as parameter
+		 *
+		 * @see {@link http://veganguide.org/api|vg.place.getInfo}
+		 * @param {string} id - Id of a place
+		 * @param {fn} callback - Function to execute
+		 */
+		getInfo: function(place, callback) {
+			get(
+				// json dummy
+				'api/JSON_Dummies/neu_getInfo.json',
+				// live api
+				//this.url + 'veganguide/place/' + safe(this.lang) + '/place/' + safe(place), // url to the api call
+				'getInfo',  // api function name
+				callback // callback which gets called with data
+			);
+		},
+
+		/** 
+		 * @ngdoc method
+		 * @name getComments
+		 * @methodOf app.api.apiService
+		 * @description
+		 * Executes a callback with all comments of a place as parameter
+		 *
+		 * @see {@link http://veganguide.org/api|vg.place.getComments}
+		 * @param {string} id - Id of a place
+		 * @param {fn} callback - Function to execute
+		 */
+		getComments: function(place, callback) {
+			get(
+				// json dummy
+				'api/JSON_Dummies/neu_getComments.json',
+				// live api
+				//this.url + 'veganguide/place/' + safe(this.lang) + '/place/' + safe(place), // url to the api call
+				'getComments',  // api function name
+				callback // callback which gets called with data
+			);
 		}
+
 	};
 }]);

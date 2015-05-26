@@ -1,13 +1,6 @@
 /* Custom CSS for the mobile vegan guide app */
 
 /*
- * General
- */
-div.ui-content {
-	padding-top: 5px; /* after the header there are just 5px of space before the content begins
-}
-
-/*
  * Page: New places
  */
 
@@ -51,9 +44,11 @@ img[data-role="map"] {
 }
 
 /* place page dt list */
+#place li.centered {
+	text-align: center;
+}
 #place dl {
-	display: block;
-	width: 180px;
+	display: inline-block;
 	margin: auto;
 }
 #place dt {
@@ -63,18 +58,29 @@ img[data-role="map"] {
 	display: inline;
 	margin: 0;
 }
-#place dd.place-info-orientation[data-orientation="vegetarian"] a {
+#place dd.place-info-orientation span {
 	display: inline-block;
-	width: 50px;
+	width: 75px;
 	height: 36px;
-	background: #8cc63f url("http://veganguide.org/style/vegan/vegetarian.png") repeat-x center;
+	background: #8cc63f repeat-x center;
 	background-size: 100px;
 	text-indent: -1000em;
 	position: relative;
 	top: -9px;
 	border-radius: 1em 1em 1em 1em;
     border: 1px solid #CCCCCC;
-    cursor: pointer;
+}
+#place dd.place-info-orientation[data-orientation="vegetarian"] span {
+	background-image: url("../img/vegetarian.png");
+}
+#place dd.place-info-orientation[data-orientation="vegan"] span {
+	background-image: url("../img/vegan.png");
+}
+#place dd.place-info-orientation[data-orientation="freegan"] span {
+	background-image: url("../img/freegan.png");
+}
+#place dd.place-info-orientation[data-orientation="omnivor"] span {
+	background-image: url("../img/omnivor.png");
 }
 #place dd.place-info-rater:before {
 	content: "(";
@@ -94,6 +100,10 @@ img[data-role="map"] {
 #place dd[data-rating="3"]  { width: 48px; }
 #place dd[data-rating="4"]  { width: 64px; }
 #place dd[data-rating="5"]  { width: 80px; }
+/* description can contain line breaks */
+#place p {
+	white-space: pre-wrap !important;
+}
 /* paragraphs in the content list */
 #place ul[data-role="listview"] p {
 	white-space: normal; /* show full text */
@@ -112,7 +122,7 @@ img[data-role="map"] {
 }
 /* list of comments */
 #comments {
-	padding: 0; /* reset padding of list in list */
+
 }
 /* button to expand/collapse the comments */
 #buttonComments {
@@ -120,6 +130,7 @@ img[data-role="map"] {
 	background-color: transparent;
 	border-width: 0;
 	padding: 0;
+	margin: 0;
 }
 /* button is focused */
 #buttonComments:focus {

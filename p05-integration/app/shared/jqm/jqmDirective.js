@@ -52,6 +52,30 @@ ngApp.directive(
 );
 
 /**
+ * @ngdoc directive
+ * @name app.directive:listview-refresh
+ * @restrict A
+ * @description
+ * Refresh the complete jqm listview.
+ * Used in combination with ng-if for checking if data model changed
+ * and ng-bind in underlaying li elements.
+ *
+ * @example
+<ul ng-if="data" listview-refresh>
+	<li ng-bind="data.a"></li>
+	<li ng-bind="data.b"></li>
+</ul>
+ */
+ngApp.directive("listviewRefresh", [function() {
+	return {
+		compile : function(element) {
+			element.removeAttr('listview-refresh'); // necessary to avoid infinite compile loop
+			element.listview().listview("refresh");	
+		}
+	};
+}]); 
+
+/**
  * JQuery Mobile config 
  */
 $.mobile.linkBindingEnabled = false; // deactivate auto link  binding

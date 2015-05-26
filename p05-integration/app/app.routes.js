@@ -19,6 +19,11 @@ ngApp.config(['$routeProvider',
 				templateUrl: 'app/components/list/places/listPlacesView.html',
 				controller: 'listPlacesController'
 			}).
+			// Place detail page
+			when('/place/:place', {
+				templateUrl: 'app/components/place/placeView.html',
+				controller: 'PlaceController'
+			}).
 			// Default
 			otherwise({
 				redirectTo: '/local'

@@ -1,1 +1,29 @@
-{"status":"ok","data":{"name":"Al Bascha Bistro","identifier":"al-bascha-bistro","city":"Leipzig","address":"Bornaische Stra\u00dfe 24 ","country":"Deutschland","description":"Der Al Bascha Bistro ist ein typischer D\u00f6nerladen..\r\n\r\nAb Januar ganz neu gibt es jetzt dort vegane Pizzen mit leckeren veganen K\u00e4se.\u00a0\r\n\r\nUnd schon l\u00e4nger gibt es dort im Speiseplan den Saitand\u00f6ner mit Seasamso\u00dfe und Kraut\/Salat usw.\r\n\r\nPreise: Saitand\u00f6ner 3,50 \u20ac\r\nPizzen: 26 cm \u00a0 \u00a0\u00a0 5 \u20ac\r\n            30 cm \u00a0 \u00a0\u00a0 7 \u20ac\r\n\r\ndann lasst es euch dort schmecken.","open":false,"contact":{"phone":false,"fax":false,"www":false,"email":false},"orientation":"omnivor","coords":{"lat":"51.308089","lon":"12.3772442"},"submitter":"","rating":{"votes":"0","rating":false},"photo":false}}
+{
+	"status": "ok",
+	"data": {
+		"name": "Al Bascha Bistro",
+		"identifier": "al-bascha-bistro",
+		"city": "Leipzig",
+		"address": "Bornaische Stra\u00dfe 24 ",
+		"country": "Deutschland",
+		"description": "Der Al Bascha Bistro ist ein typischer D\u00f6nerladen..\r\n\r\nAb Januar ganz neu gibt es jetzt dort vegane Pizzen mit leckeren veganen K\u00e4se.\u00a0\r\n\r\nUnd schon l\u00e4nger gibt es dort im Speiseplan den Saitand\u00f6ner mit Seasamso\u00dfe und Kraut\/Salat usw.\r\n\r\nPreise: Saitand\u00f6ner 3,50 \u20ac\r\nPizzen: 26 cm \u00a0 \u00a0\u00a0 5 \u20ac\r\n            30 cm \u00a0 \u00a0\u00a0 7 \u20ac\r\n\r\ndann lasst es euch dort schmecken.",
+		"open": false,
+		"contact": {
+			"phone": false,
+			"fax": false,
+			"www": false,
+			"email": false
+		},
+		"orientation": "omnivor",
+		"coords": {
+			"lat": "51.308089",
+			"lon": "12.3772442"
+		},
+		"submitter": "",
+		"rating": {
+			"votes": "0",
+			"rating": false
+		},
+		"photo": false
+	}
+}

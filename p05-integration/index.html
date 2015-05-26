@@ -41,6 +41,9 @@
 	<script src="app/components/list/cities/listCitiesController.js" type="text/javascript"></script>
 	<script src="app/components/list/places/listPlacesModel.js" type="text/javascript"></script>
 	<script src="app/components/list/places/listPlacesController.js" type="text/javascript"></script>
+	<!-- app / components / place -->
+	<script src="app/components/place/placeModel.js" type="text/javascript"></script>
+	<script src="app/components/place/placeController.js" type="text/javascript"></script>
 </head>
 <body>
 	<div jqm>
@@ -50,7 +53,7 @@
 			<h1 ng-bind-html="pageTitle"></h1>
 			<button data-role="button" data-icon="bars" data-iconpos="notext" class="ui-btn-right" menu-toggle>Menü</button>
 		</div>
-		<div data-role="content" ng-view="">	
+		<div data-role="content" ng-view="" jqm>	
 		</div><!-- /content -->
 	</div><!-- /page places -->
 </body>
