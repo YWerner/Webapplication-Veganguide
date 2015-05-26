@@ -11,7 +11,7 @@
  * @param {fn} Factory function with any parameter defined so far
  * @returns {object} PlaceList 
  */
-ngApp.factory('PlaceList', ['apiService', '$filter', function(apiService, $filter) {
+ngApp.factory('PlaceList', ['apiService', function(apiService) {
 
 	/**
 	 * @ngdoc function
@@ -57,8 +57,6 @@ ngApp.factory('PlaceList', ['apiService', '$filter', function(apiService, $filte
 		this.load = function(country, city) {
 			var self = this; // to reach 'this' in the callback
 			apiService.listPlacesByCity(country, city, function(response) { // get data using api
-				response.data = $filter('unique')(response.data, 'name'); // discarded duplicate entries by name
-				response.data = $filter('noFaulty')(response.data, 'name'); // discard entries beginning with a '!'
 				angular.extend(self, response); // inject data back
 			});	
 		};

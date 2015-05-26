@@ -8,11 +8,10 @@
  * 
  * @param {string} Service name
  * @param {string} apiService
- * @param {object} $filter
  * @param {fn} Factory function with any parameter defined so far
  * @returns {object} CityList 
  */
-ngApp.factory('CityList', ['apiService', '$filter', function(apiService, $filter) {
+ngApp.factory('CityList', ['apiService', function(apiService) {
 
 	/**
 	 * @ngdoc function
@@ -55,8 +54,6 @@ ngApp.factory('CityList', ['apiService', '$filter', function(apiService, $filter
 		this.load = function(country) {
 			var self = this; // to reach 'this' in the callback
 			apiService.listCities(country, function(response) { // get data using api
-				response.data = $filter('unique')(response.data, 'name'); // discarded duplicate entries by name
-				response.data = $filter('noFaulty')(response.data, 'name'); // discard entries beginning with a '!'
 				angular.extend(self, response); // inject data back
 			});	
 		};

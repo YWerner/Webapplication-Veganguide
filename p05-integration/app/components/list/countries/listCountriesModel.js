@@ -8,11 +8,10 @@
  * 
  * @param {string} Service name
  * @param {string} apiService
- * @param {object} $filter
  * @param {fn} Factory function with any parameter defined so far
  * @returns {object} PlaceList 
  */
-ngApp.factory('CountryList', ['apiService', '$filter', function(apiService, $filter) {
+ngApp.factory('CountryList', ['apiService', function(apiService, $filter) {
 
 	/**
 	 * @ngdoc function
