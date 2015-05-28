@@ -21,6 +21,7 @@ var ngApp = angular.module('app', ['ngRoute', 'ngAnimate', 'ngOrderObjectBy', 'n
  */
 ngApp.run(["$rootScope", "$location", "menuService", function($rootScope, $location, menuService) {
 	// Component: menu
+	$rootScope.menu = menuService;
 	$rootScope.$on('$routeChangeStart', function (event, next, current) { // a route is changedS
 		menuService.route(event); // call routing from menu service
 	});

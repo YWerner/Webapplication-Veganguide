@@ -13,11 +13,13 @@
  */
 ngApp.controller('PlaceController', ['$scope', '$rootScope', '$routeParams', 'Place', function($scope, $rootScope, $routeParams, Place){
 	$rootScope.pageTitle = "Lokal"; // default page title
-	$rootScope.pageBack = ""; // no back link currently
+	$rootScope.pageBack = ""; // no back link
 	$scope.showComments = false; // dont show comments as page loads
 	$scope.place = new Place($routeParams.place); // get the Place model
 	$scope.$watch('place.data', function(value) {  // watch for changes on the data of place
-		$rootScope.pageTitle = $scope.place.data.name; // change page title to the current place name
+		if($scope.place.data) {
+			$rootScope.pageTitle = $scope.place.data.name; // change page title to the current place name
+		}
 	});
 	$scope.comments = function() { // trigger for comments loading
 		if($scope.place.comments === undefined) { // first call

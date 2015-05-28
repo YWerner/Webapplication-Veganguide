@@ -228,10 +228,7 @@ ngApp.factory('apiService', ['$http', '$localStorage', '$filter', function($http
 		 */
 		getInfo: function(place, callback) {
 			get(
-				// json dummy
-				'api/JSON_Dummies/neu_getInfo.json',
-				// live api
-				//this.url + 'veganguide/place/' + safe(this.lang) + '/place/' + safe(place), // url to the api call
+				this.url + 'veganguide/local/' + safe(this.lang) + '/place/' + safe(place) + '/action/info', // url to the api call
 				'getInfo',  // api function name
 				callback // callback which gets called with data
 			);
@@ -250,11 +247,28 @@ ngApp.factory('apiService', ['$http', '$localStorage', '$filter', function($http
 		 */
 		getComments: function(place, callback) {
 			get(
-				// json dummy
-				'api/JSON_Dummies/neu_getComments.json',
-				// live api
-				//this.url + 'veganguide/place/' + safe(this.lang) + '/place/' + safe(place), // url to the api call
+				this.url + 'veganguide/local/' + safe(this.lang) + '/place/' + safe(place) + '/action/comments', // url to the api call
 				'getComments',  // api function name
+				callback // callback which gets called with data
+			);
+		},
+
+		/** 
+		 * @ngdoc method
+		 * @name getImage
+		 * @methodOf app.api.apiService
+		 * @description
+		 * Executes a callback with the URL to an image of this place as parameter
+		 *
+		 * @see {@link http://veganguide.org/api|vg.place.getImage}
+		 * @param {string} id - Id of a place
+		 * @param {int} width - Request width of the image
+		 * @param {fn} callback - Function to execute
+		 */
+		getImage: function(place, width, callback) {
+			get(
+				this.url + 'veganguide/local/' + safe(this.lang) + '/place/' + safe(place) + '/action/image/width/' + safe(width), // url to the api call
+				'getImage',  // api function name
 				callback // callback which gets called with data
 			);
 		}

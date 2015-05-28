@@ -12,6 +12,6 @@
  */
 ngApp.controller('listCountriesController', ['$scope', '$rootScope', 'CountryList', function($scope, $rootScope, CountryList) {
 	$rootScope.pageTitle = "Alle Orte"; // set page tilte
-	$rootScope.pageBack = ""; // set no back link in the header
+	$rootScope.menu.clear(); // set no back link in the header
 	$scope.countryList = new CountryList(); // get the CountryList model
 }]);

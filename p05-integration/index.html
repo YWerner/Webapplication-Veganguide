@@ -31,6 +31,7 @@
 	<script src="app/shared/api/apiService.js" type="text/javascript"></script>
 	<script src="app/shared/api/uniqueFilter.js" type="text/javascript"></script>
 	<script src="app/shared/api/noFaultyFilter.js" type="text/javascript"></script>
+	<script src="app/shared/api/i18nFilter.js" type="text/javascript"></script>
 	<!-- app / shared / menu -->
 	<script src="app/shared/menu/menuService.js" type="text/javascript"></script>
 	<script src="app/shared/menu/menuDirective.js" type="text/javascript"></script>
@@ -49,7 +50,7 @@
 	<div jqm>
 		<div ng-include src="'app/shared/menu/menuView.html'" jqm></div>
 		<div data-role="header" data-position="fixed">
-			<a ng-if="pageBack" href="{{pageBack}}" data-rel="back" role="button" data-icon="arrow-l" data-iconpos="notext" class="ui-btn-left">Zurück</a>
+			<button ng-if="menu.last().section" role="button" data-icon="arrow-l" data-iconpos="notext" class="ui-btn-left" menu-back>Zurück</button>
 			<h1 ng-bind-html="pageTitle"></h1>
 			<button data-role="button" data-icon="bars" data-iconpos="notext" class="ui-btn-right" menu-toggle>Menü</button>
 		</div>

@@ -99,3 +99,23 @@ ngApp.directive("menuListToggle", ["menuService", function(menuService) {
 		}
 	};
 }]); 
+
+/**
+ * @ngdoc directive
+ * @name app.directive:menu-list-toggle
+ * @restrict A
+ * @source https://gist.github.com/jakemmarsh/5867727
+ * @description
+ * Navigates to the last page.
+ */
+ngApp.directive('menuBack', ['$window', function($window) {
+	return {
+		restrict : 'A',
+		link : function(scope, elem, attrs) {
+			elem.bind('click', function() {
+				$window.history.back();
+			});
+		}
+	};
+}]); 
+

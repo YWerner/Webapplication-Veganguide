@@ -35,6 +35,17 @@ ngApp.factory('menuService', ['$location', function($location) {
 	var replaySection;
 
 	/**
+	 * @ngdoc property
+	 * @name lastSection
+	 * @type {string}
+	 * @propertyOf app.menu.menuService
+	 * @see remember
+	 * @description
+	 * Last remembered section name and url. 
+	 */
+	var last = { section: "" };
+
+	/**
 	 * Factory to create the menuService. 
 	 */
 	return {
@@ -53,6 +64,19 @@ ngApp.factory('menuService', ['$location', function($location) {
 
 		/**
 		 * @ngdoc method
+		 * @name lastSection
+		 * @methodOf app.menu.menuService
+		 * @public
+		 * @description
+		 * Returns the url and name of the latest remembered section. 
+		 * @return {object} Object with properties url and section.
+		 */
+		last: function() {
+			return last;
+		},
+
+		/**
+		 * @ngdoc method
 		 * @name remember
 		 * @methodOf app.menu.menuService
 		 * @public
@@ -64,6 +88,7 @@ ngApp.factory('menuService', ['$location', function($location) {
 		remember: function(url, section) {
 			console.log("MENU: remember: section = " + section + ", path = " + url);
 			if(!section) section = "_default"; // if non section is given, use default
+			last = { "section" : section}; // also store the latest remembered section
 			history[section] = url; // store the url for this section
 		},
 
@@ -74,13 +99,20 @@ ngApp.factory('menuService', ['$location', function($location) {
 		 * @public
 		 * @description
 		 * Replay this section and reroute the user.
+		 * But only if current/last section is not the requested one.
+		 * The reason is, so the user can come back to the root page of this section.
+		 * May change if user doesn't like this behaviour.
 		 * 
 		 * @param {string} section - Self declared section in wich this entry is in scope for remembering.  
 		 */
 		replay: function(section) {
 			console.log("MENU: replay: section = " + section);
 			if(!section) section = "_default"; // if non section is given, use default
-			replaySection = section;
+			if(section != last.section)  { // last section and next are different
+				replaySection = section;
+			} else { // the same, no reroute
+				console.log("MENU: replay: denied, because last section is equal to the requested on = " + lastSection);
+			}
 		},
 
 		/**
@@ -107,6 +139,18 @@ ngApp.factory('menuService', ['$location', function($location) {
 				console.log("MENU: route: do not change route.");
 				return false;
 			}
+		},
+
+		/**
+		 * @ngdoc method
+		 * @nameclear
+		 * @public
+		 * @description
+		 * Clears the special last property.
+		 * Should be called in the controller of a root page of an section to prevent an endless back-button.
+		 */
+		clear: function(){
+			last = { section: "" };
 		}
 
 	};
