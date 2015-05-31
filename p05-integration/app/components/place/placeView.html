@@ -23,7 +23,7 @@
 			</ul>
 		</li><!-- /navbar -->
 		<li data-role="list-divider" ng-if="::place.data.description"><h2>Beschreibung</h2></li>
-		<li ng-if="::place.data.description"><p ng-bind="::place.data.description"></p></li>
+		<li ng-if="::place.data.description"><p ng-bind-html="::place.data.description"></p></li>
 		<li data-role="list-divider" ng-if="::place.data.open"><h2>Öffnungszeiten</h2></li>
 		<li ng-if="::place.data.open"><p ng-bind-html="::place.data.open | i18n"></p></li>
 		<li data-role="list-divider"><h2>Anschrift</h2></li>
