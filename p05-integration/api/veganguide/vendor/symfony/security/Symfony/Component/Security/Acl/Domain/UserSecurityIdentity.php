@@ -102,7 +102,7 @@ final class UserSecurityIdentity implements SecurityIdentityInterface
      */
     public function equals(SecurityIdentityInterface $sid)
     {
-        if (!$sid instanceof self) {
+        if (!$sid instanceof UserSecurityIdentity) {
             return false;
         }
 

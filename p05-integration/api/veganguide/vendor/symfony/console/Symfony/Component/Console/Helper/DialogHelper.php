@@ -74,7 +74,7 @@ class DialogHelper extends InputAwareHelper
                 if (empty($choices[$value])) {
                     throw new \InvalidArgumentException(sprintf($errorMessage, $value));
                 }
-                $multiselectChoices[] = $value;
+                array_push($multiselectChoices, $value);
             }
 
             if ($multiselect) {

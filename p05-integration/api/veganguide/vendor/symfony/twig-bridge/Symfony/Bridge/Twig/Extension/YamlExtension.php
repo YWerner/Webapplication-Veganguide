@@ -56,7 +56,9 @@ class YamlExtension extends \Twig_Extension
     }
 
     /**
-     * {@inheritdoc}
+     * Returns the name of the extension.
+     *
+     * @return string The extension name
      */
     public function getName()
     {

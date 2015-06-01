@@ -217,7 +217,7 @@ abstract class AbstractRememberMeServices implements RememberMeServicesInterface
      * @param array   $cookieParts
      * @param Request $request
      *
-     * @return UserInterface
+     * @return TokenInterface
      */
     abstract protected function processAutoLoginCookie(array $cookieParts, Request $request);
 

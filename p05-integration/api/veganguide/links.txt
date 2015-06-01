@@ -1,0 +1,4 @@
+https://github.com/bojanz/musicbox/tree/master/src/MusicBox/Controller
+https://github.com/topikito/Silex-MVC/tree/master/src/SilexMVC
+https://github.com/manelpm10/Silex-MVC-Example-with-Auth/tree/master/src/model
+http://vegan.sonicdev.de/#/local

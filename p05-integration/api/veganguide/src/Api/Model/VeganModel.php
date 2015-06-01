@@ -6,6 +6,7 @@ include '../inc/xmlrpc-3.0.1/extras-0.5/xmlrpc_extension_api/xmlrpc_extension_ap
 include '../config/api.config.inc';
 
 use Api\Model\XmlModel;
+use Api\Model\CacheModel;
 
 class VeganModel extends XmlModel {
 
@@ -13,6 +14,9 @@ class VeganModel extends XmlModel {
 	private $_lang;
 	private $_city;
 	private $_country;
+	private $_place;
+	private $_query;
+	private $_width;
 	private $_answerparams;
 	
 	public function __set($variable, $value)
@@ -60,6 +64,65 @@ class VeganModel extends XmlModel {
             "city"		=> $this->_city,
             "country"	=> $this->_country,
             "verbose"	=> $this->_answerparams
+        );
+
+        $response = $this->_doApiCall($method, $data);
+        return $response;
+    }
+	
+	public function getPlacesByCoords()
+    {
+        $method = "vg.search.byCoords";
+        
+        $data = array(
+            "apikey"	=> $this->_apikey,
+            "lang"		=> $this->_lang,
+            "query"		=> $this->_query,
+			"verbose" => $this ->_answerparams
+        );
+
+        $response = $this->_doApiCall($method, $data);
+        return $response;
+    }
+	
+	public function getInfo()
+    {
+        $method = "vg.place.getInfo";
+        
+        $data = array(
+            "apikey"	=> $this->_apikey,
+            "lang"		=> $this->_lang,
+            "place"		=> $this->_place
+        );
+
+        $response = $this->_doApiCall($method, $data);
+        return $response;
+    }
+	
+	public function getComments()
+    {
+        $method = "vg.place.getComments";
+        
+        $data = array(
+            "apikey"	=> $this->_apikey,
+            "lang"		=> $this->_lang,
+            "place"		=> $this->_place
+        );
+
+        $response = $this->_doApiCall($method, $data);
+        return $response;
+    }
+	
+	public function getImage()
+    {
+        $method = "vg.place.getImage";
+        
+        $data = array(
+            "apikey"	=> $this->_apikey,
+            "lang"		=> $this->_lang,
+            "place"		=> $this->_place,
+			"width" => $this ->_width,
+			"returnmethod" => 0
         );
 
         $response = $this->_doApiCall($method, $data);

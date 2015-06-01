@@ -12,7 +12,6 @@
 namespace Symfony\Component\HttpKernel\DataCollector;
 
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Stopwatch\Stopwatch;
 use Symfony\Component\VarDumper\Cloner\Data;
@@ -34,14 +33,12 @@ class DumpDataCollector extends DataCollector implements DataDumperInterface
     private $clonesIndex = 0;
     private $rootRefs;
     private $charset;
-    private $dumper;
 
-    public function __construct(Stopwatch $stopwatch = null, $fileLinkFormat = null, $charset = null, RequestStack $requestStack = null)
+    public function __construct(Stopwatch $stopwatch = null, $fileLinkFormat = null, $charset = null)
     {
         $this->stopwatch = $stopwatch;
         $this->fileLinkFormat = $fileLinkFormat ?: ini_get('xdebug.file_link_format') ?: get_cfg_var('xdebug.file_link_format');
         $this->charset = $charset ?: ini_get('php.output_encoding') ?: ini_get('default_charset') ?: 'UTF-8';
-        $this->requestStack = $requestStack;
 
         // All clones share these properties by reference:
         $this->rootRefs = array(
@@ -87,7 +84,7 @@ class DumpDataCollector extends DataCollector implements DataDumperInterface
                 $line = $trace[$i]['line'];
 
                 while (++$i < 7) {
-                    if (isset($trace[$i]['function'], $trace[$i]['file']) && empty($trace[$i]['class']) && 0 !== strpos($trace[$i]['function'], 'call_user_func')) {
+                    if (isset($trace[$i]['function']) && empty($trace[$i]['class']) && 'call_user_func' !== $trace[$i]['function']) {
                         $file = $trace[$i]['file'];
                         $line = $trace[$i]['line'];
 
@@ -121,12 +118,8 @@ class DumpDataCollector extends DataCollector implements DataDumperInterface
             $name = substr($name, strrpos($name, '/') + 1);
         }
 
-        if ($this->dumper) {
-            $this->doDump($data, $name, $file, $line);
-        } else {
-            $this->data[] = compact('data', 'name', 'file', 'line', 'fileExcerpt');
-            ++$this->dataCount;
-        }
+        $this->data[] = compact('data', 'name', 'file', 'line', 'fileExcerpt');
+        ++$this->dataCount;
 
         if ($this->stopwatch) {
             $this->stopwatch->stop('dump');
@@ -135,33 +128,6 @@ class DumpDataCollector extends DataCollector implements DataDumperInterface
 
     public function collect(Request $request, Response $response, \Exception $exception = null)
     {
-        if ($this->requestStack && $this->requestStack->getMasterRequest() !== $request) {
-            return;
-        }
-
-        // In all conditions that remove the web debug toolbar, dumps are written on the output.
-        if (!$this->requestStack
-            || $request->isXmlHttpRequest()
-            || !$response->headers->has('X-Debug-Token')
-            || $response->isRedirection()
-            || ($response->headers->has('Content-Type') && false === strpos($response->headers->get('Content-Type'), 'html'))
-            || 'html' !== $request->getRequestFormat()
-            || false === strripos($response->getContent(), '</body>')
-        ) {
-            if ($response->headers->has('Content-Type') && false !== strpos($response->headers->get('Content-Type'), 'html')) {
-                $this->dumper = new HtmlDumper('php://output', $this->charset);
-            } else {
-                $this->dumper = new CliDumper('php://output', $this->charset);
-            }
-
-            foreach ($this->data as $i => $dump) {
-                $this->data[$i] = null;
-                $this->doDump($dump['data'], $dump['name'], $dump['file'], $dump['line']);
-            }
-
-            $this->data = array();
-            $this->dataCount = 0;
-        }
     }
 
     public function serialize()
@@ -174,7 +140,6 @@ class DumpDataCollector extends DataCollector implements DataDumperInterface
         $this->data = array();
         $this->dataCount = 0;
         $this->isCollected = true;
-        $this->dumper = null;
 
         return $ser;
     }
@@ -233,39 +198,36 @@ class DumpDataCollector extends DataCollector implements DataDumperInterface
             }
 
             if ('cli' !== PHP_SAPI && stripos($h[$i], 'html')) {
-                $this->dumper = new HtmlDumper('php://output', $this->charset);
+                $dumper = new HtmlDumper('php://output', $this->charset);
             } else {
-                $this->dumper = new CliDumper('php://output', $this->charset);
+                $dumper = new CliDumper('php://output', $this->charset);
+                $dumper->setColors(false);
             }
 
             foreach ($this->data as $i => $dump) {
                 $this->data[$i] = null;
-                $this->doDump($dump['data'], $dump['name'], $dump['file'], $dump['line']);
+
+                if ($dumper instanceof HtmlDumper) {
+                    $dump['name'] = $this->htmlEncode($dump['name']);
+                    $dump['file'] = $this->htmlEncode($dump['file']);
+                    if ('' !== $dump['file']) {
+                        if ($this->fileLinkFormat) {
+                            $link = strtr($this->fileLinkFormat, array('%f' => $dump['file'], '%l' => $dump['line']));
+                            $dump['name'] = sprintf('<a href="%s" title="%s">%s</a>', $link, $dump['file'], $dump['name']);
+                        } else {
+                            $dump['name'] = sprintf('<abbr title="%s">%s</abbr>', $dump['file'], $dump['name']);
+                        }
+                    }
+                    echo "\n<span class=\"sf-dump-meta\">{$dump['name']} on line {$dump['line']}:</span>";
+                } else {
+                    echo "{$dump['name']} on line {$dump['line']}:\n";
+                }
+                $dumper->dump($dump['data']);
             }
 
             $this->data = array();
             $this->dataCount = 0;
         }
-    }
-
-    private function doDump($data, $name, $file, $line)
-    {
-        if ($this->dumper instanceof HtmlDumper) {
-            $name = $this->htmlEncode($name);
-            $file = $this->htmlEncode($file);
-            if ('' !== $file) {
-                if ($this->fileLinkFormat) {
-                    $link = strtr($this->fileLinkFormat, array('%f' => $file, '%l' => $line));
-                    $name = sprintf('<a href="%s" title="%s">%s</a>', $link, $file, $name);
-                } else {
-                    $name = sprintf('<abbr title="%s">%s</abbr>', $file, $name);
-                }
-            }
-            echo "\n<span class=\"sf-dump-meta\">{$name} on line {$line}:</span>";
-        } else {
-            echo "{$name} on line {$line}:\n";
-        }
-        $this->dumper->dump($data);
     }
 
     private function htmlEncode($s)

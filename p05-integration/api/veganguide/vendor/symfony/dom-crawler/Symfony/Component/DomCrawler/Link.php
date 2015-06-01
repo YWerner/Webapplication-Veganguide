@@ -163,7 +163,7 @@ class Link
             if ('..' === $segment) {
                 array_pop($output);
             } elseif ('.' !== $segment) {
-                $output[] = $segment;
+                array_push($output, $segment);
             }
         }
 
