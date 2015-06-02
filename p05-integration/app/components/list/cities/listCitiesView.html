@@ -1,7 +1,7 @@
-<ul data-role="listview" data-autodividers="true" data-filter="true" data-filter-placeholder="Städte filtern...">
-	<li ng-repeat="city in cityList.data | orderObjectBy: 'name': false" refresh-list>
-		<a href="#/local/{{::country}}/{{::city.identifier}}" menu-remember="list">
-			{{::city.name}} <span class="ui-li-count">{{::city.count}}</span>
+<ul data-role="listview" data-autodividers="true" data-filter="true" data-filter-placeholder="Städte filtern..." class="ui-listview">
+	<li ng-repeat="city in cityList.data | orderObjectBy: 'name': false" class="ui-li-has-count" refresh-list>
+		<a href="#/local/{{::country}}/{{::city.identifier}}" menu-remember="list" class="ui-btn ui-btn-icon-right ui-icon-carat-r">
+			{{::city.name}} <span class="ui-li-count ui-body-inherit">{{::city.count}}</span>
 		</a>
 	</li>
 </ul><!-- /listview -->
