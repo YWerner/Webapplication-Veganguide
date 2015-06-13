@@ -28,16 +28,7 @@ class CacheModel {
 	
 	public function _getCacheFileName(Request $request)
 	{
-		$answer = '';
-		$params = $request->attributes->all();
-		foreach ( $params as $key => $val )
-		{
-			if (strpos($key, '_') === false && $key!='app')
-			{
-				$answer .= $val;
-			}
-		}
-		return '../tmp/'.$answer.'.tmp';
+		return '../tmp/'. md5($request->getUri()).'.tmp';
 	}
 }
 
