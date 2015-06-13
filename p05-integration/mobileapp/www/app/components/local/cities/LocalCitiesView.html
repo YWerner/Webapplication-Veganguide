@@ -1,0 +1,24 @@
+<ion-view>
+    <ion-nav-title ng-bind-html="countryList.getById(country).name">Städte</ion-nav-title>
+    <ion-content>
+        <ion-list>
+            <!-- Filter -->
+            <label class="item item-input">
+                <i class="icon ion-search placeholder-icon"></i>
+                <input type="search"
+                       placeholder="Städte filtern..."
+                       ng-model="search.name"
+                       ng-focus="searchFocused = true"
+                       ng-blur="searchFocused = false"
+                       ng-change="scrollTop()">
+                <button ng-if="search.name.length"
+                        class="button button-icon ion-android-close input-button"
+                        mvg-reset-input="search.name"></button>
+            </label>
+            <!-- List -->
+            <ion-item collection-repeat="city in cityList.data | filter:search" href="#/app/local/{{country}}/{{city.identifier}}">
+                <span ng-bind-html="city.name"></span> <span class="badge badge-balanced">{{city.count}}</span>
+            </ion-item>
+        </ion-list>
+    </ion-content>
+</ion-view>

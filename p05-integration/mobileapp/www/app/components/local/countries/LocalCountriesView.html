@@ -1,0 +1,23 @@
+<ion-view view-title="Länder">
+    <ion-content>
+        <ion-list>
+            <!-- Filter -->
+            <label class="item item-input">
+                <i class="icon ion-search placeholder-icon"></i>
+                <input type="search"
+                       placeholder="Länder filtern..."
+                       ng-model="search.name"
+                       ng-focus="searchFocused = true"
+                       ng-blur="searchFocused = false"
+                       ng-change="scrollTop()">
+                <button ng-if="search.name.length"
+                        class="button button-icon ion-android-close input-button"
+                        on-tap="search.name = ''"></button>
+            </label>
+            <!-- List -->
+            <ion-item collection-repeat="country in countryList.data | filter:search" ng-href="#/app/local/{{country.identifier}}">
+                <span ng-bind-html="country.name"></span> <span class="badge badge-balanced">{{country.count}}</span>
+            </ion-item>
+        </ion-list>
+    </ion-content>
+</ion-view>

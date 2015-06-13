@@ -1,0 +1,53 @@
+﻿<ion-view>
+    <ion-nav-title ng-bind-html="place.data.name">Lokal</ion-nav-title>
+    <ion-content>
+        <div class="card" ng-if="place.data.orientation">
+            <div class="item item-avatar item-avatar-orientation">
+                <img ng-src="img/orientation/{{place.data.orientation}}.png" alt="{{place.data.orientation}}">
+                <h2><i class="icon ion-star light" ng-repeat="r in rating"></i></h2>
+                <p>({{place.data.rating.votes}} BewerterInnen)</p>
+            </div>
+            <div class="item item-image" ng-if="place.image.data.url">
+                <img ng-src="{{::place.image.data.url}}" alt="Bild von {{place.data.name}}">
+            </div>
+        </div>
+        <div class="card">
+            <div class="item item-divider">Kontakt</div>
+            <div class="item tabs tabs-secondary tabs-icon-left">
+                <a class="tab-item" ng-href="tel:{{place.data.contact.phone}}"  title="{{place.data.name}} anrufen" ng-disabled="!place.data.contact.phone">
+                    <i class="icon ion-android-call balanced"></i>Telefon
+                </a>
+                <a class="tab-item" ng-href="mailto:{{place.data.contact.email}}" title="{{place.data.name}} schreiben" ng-disabled="!place.data.contact.email">
+                    <i class="icon ion-email balanced"></i>E-Mail
+                </a>
+                <a class="tab-item" ng-href="{{place.data.contact.www}}" title="{{place.data.name}} besuchen" ng-disabled="!place.data.contact.www">
+                    <i class="icon ion-earth balanced"></i>Website
+                </a>
+            </div>
+        </div>
+        <div class="card" ng-if="place.data.description">
+            <div class="item item-divider">Beschreibung</div>
+            <div class="item item-text-wrap-multiline" ng-bind-html="place.data.description"></div>
+        </div>
+        <div class="card" ng-if="place.data.open">
+            <div class="item item-divider">Öffnungszeiten</div>
+            <div class="item item-text-wrap-multiline" ng-bind-html="place.data.open | i18n"></div>
+        </div>
+        <div class="card" ng-if="place.data.address">
+            <div class="item item-divider">Anfahrt</div>
+            <div class="item item-image">
+                <a href="https://www.google.de/maps/place/{{::place.data.address}}, {{::place.data.city}}, {{::place.data.country}}/18z" title="{{::place.data.name}} in Google Maps">
+                    <img ng-src="http://maps.google.com/maps/api/staticmap?size=400x400&format=png32&center={{::place.data.coords.lat}},{{::place.data.coords.lon}}&zoom=15&markers={{::place.data.coords.lat}},{{::place.data.coords.lon}}" alt="Karte">
+                </a>
+            </div>
+            <div class="item item">{{::place.data.address}}<br>{{::place.data.city}}<br>{{::place.data.country}}</div>
+        </div>
+        <div class="card">
+            <div class="item item-divider"><span ng-click="toggleComments()"><i class="icon balanced" ng-class="showComments ? 'ion-minus' : 'ion-plus'"></i> Kommentare</span></div>
+            <ion-item ng-repeat="comment in place.comments.data" ng-if="showComments && place.comments.data">
+                <h2>{{comment.submitter}}<span class="badge badge-balanced">{{comment.date.scalar | date : 'dd.MM.yy'}}</span></h2>
+                <p ng-bind-html="comment.text" class="text-wrap"></p>
+            </ion-item>
+        </div>
+    </ion-content>
+</ion-view>

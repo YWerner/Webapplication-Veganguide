@@ -1,0 +1,7 @@
+# Cache
+AddType text/cache-manifest .manifest
+ExpiresActive On
+ExpiresDefault "access"
+
+# PHP5.3
+AddHandler php53-cgi .php

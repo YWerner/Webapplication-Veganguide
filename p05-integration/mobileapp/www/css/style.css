@@ -1,0 +1,28 @@
+/********************/
+/* Page: List(s) */
+/* "X" - clear button at the right of an input element */
+.button.button-icon.input-button {
+  position: absolute;
+  right: 0;
+  top: 5px;
+  color: #bbb;
+}
+
+/********************/
+/* Page: Place */
+.item-avatar-orientation {
+    padding-left: 120px;
+    background-color: #33CD5F;
+}
+.item-avatar-orientation > img:first-child {
+    left: 0;
+    max-width: 120px;
+}
+.item-text-wrap-multiline {
+    white-space: pre-wrap;
+    overflow: visible;
+}
+p.text-wrap {
+    white-space: pre-wrap;
+    overflow: visible;
+}

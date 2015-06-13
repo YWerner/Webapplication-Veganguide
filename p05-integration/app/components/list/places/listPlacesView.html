@@ -1,8 +1,0 @@
-<ul data-role="listview" data-autodividers="true" data-filter="true" data-filter-placeholder="Lokale filtern..." class="ui-listview">
-	<li ng-repeat="place in placeList.data | orderObjectBy: 'name': false" class="ui-li-has-count" refresh-list>
-		<a href="#/place/{{::place.identifier}}" menu-remember="list" class="ui-btn ui-btn-icon-right ui-icon-carat-r">
-			<h2>{{::place.name}} <span class="ui-li-count" ng-if="::place.verbose.rating">{{::place.verbose.rating}}*</span></h2>
-			<p>{{::place.verbose.address}}</p>
-		</a>
-	</li>
-</ul><!-- /listview -->

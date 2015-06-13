@@ -1,0 +1,47 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title></title>
+    <link href="lib/ionic/css/ionic.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
+    <link href="css/ionic.app.css" rel="stylesheet">
+    -->
+    <!-- remote logging -->
+    <!--<script src="http://jsconsole.com/remote.js?371D7412-1945-4778-B0FF-CA359F68C9D6"></script>-->
+    <!-- ionic/angularjs js -->
+    <script src="lib/ionic/js/ionic.bundle.js"></script>
+    <!-- cordova script (this will be a 404 during development) -->
+    <!--
+    <script src="cordova.js"></script>
+    <script src="scripts/platformOverrides.js"></script>
+    -->
+    <!-- windows phone -->
+    <script src="lib/platforms/windows/winstore-jscompat.js"></script>
+    <!-- app / 3rd party -->
+    <script src="lib/misc/ngStorage.min.js"></script>
+    <!-- app / general -->
+    <script src="app/app.js"></script>
+    <!-- app / shared / api -->
+    <script src="app/shared/api/ApiService.js"></script>
+    <script src="app/shared/api/i18nFilter.js"></script>
+    <script src="app/shared/api/noFaultyFilter.js"></script>
+    <script src="app/shared/api/uniqueFilter.js"></script>
+    <script src="app/shared/api/ng-order-object-by.js"></script>
+    <!-- app / local -->
+    <script src="app/components/local/countries/LocalCountriesController.js"></script>
+    <script src="app/components/local/countries/LocalCountriesModel.js"></script>
+    <script src="app/components/local/cities/LocalCitiesController.js"></script>
+    <script src="app/components/local/cities/LocalCitiesModel.js"></script>
+    <script src="app/components/local/places/LocalPlacesController.js"></script>
+    <script src="app/components/local/places/LocalPlacesModel.js"></script>
+    <!-- app / place -->
+    <script src="app/components/place/PlaceController.js"></script>
+    <script src="app/components/place/PlaceModel.js"></script>
+</head>
+<body ng-app="mvg">
+    <ion-nav-view></ion-nav-view>
+</body>
+</html>

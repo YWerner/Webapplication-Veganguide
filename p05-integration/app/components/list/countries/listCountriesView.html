@@ -1,7 +1,0 @@
-<ul data-autodividers="true" data-role="listview" data-filter="true" data-filter-placeholder="Länder filtern..." class="ui-listview">
-	<li ng-repeat="country in countryList.data | orderObjectBy: 'name': false" class="ui-li-has-count" list-refresh>
-		<a ng-href="#/local/{{::country.identifier}}" menu-remember="list" class="ui-btn ui-btn-icon-right ui-icon-carat-r">
-			<span ng-bind-html="::country.name"></span> <span class="ui-li-count ui-body-inherit" ng-bind="::country.count"></span>
-		</a>
-	</li>
-</ul><!-- /listview -->

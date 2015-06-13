@@ -1,0 +1,25 @@
+<ion-view>
+    <ion-nav-title ng-bind-html="city">Lokale</ion-nav-title>
+    <ion-content>
+        <ion-list>
+            <!-- Filter -->
+            <label class="item item-input">
+                <i class="icon ion-search placeholder-icon"></i>
+                <input type="search"
+                       placeholder="Lokale filtern..."
+                       ng-model="search.$"
+                       ng-focus="searchFocused = true"
+                       ng-blur="searchFocused = false"
+                       ng-change="scrollTop()">
+                <button ng-if="search.name.length"
+                        class="button button-icon ion-android-close input-button"
+                        mvg-reset-input="search.$"></button>
+            </label>
+            <!-- List -->
+            <ion-item collection-repeat="place in placeList.data | filter:search" href="#/app/place/{{place.identifier}}">
+                <span ng-bind-html="place.name"></span> <span class="badge badge-balanced" ng-if="place.verbose.rating">{{place.verbose.rating}}*</span>
+                <p ng-bind-html="place.verbose.address"></p>
+            </ion-item>
+        </ion-list>
+    </ion-content>
+</ion-view>
