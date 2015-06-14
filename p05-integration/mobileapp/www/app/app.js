@@ -1,22 +1,33 @@
-angular.module('mvg', ['ionic', 'ngSanitize', 'ngStorage', 'ngOrderObjectBy', 'mvg.api','mvg.general', 'mvg.local', 'mvg.place'])
+angular.module('mvg', ['ionic', 'ngSanitize', 'ngStorage', 'ngOrderObjectBy', 'geolocation', 'uiGmapgoogle-maps', 'mvg.api', 'mvg.general', 'mvg.local', 'mvg.place', 'mvg.search'])
 
 // run
-.run(function($ionicPlatform) {
-  $ionicPlatform.ready(function() {
-    // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
-    // for form inputs)
-    if (window.cordova && window.cordova.plugins.Keyboard) {
-      cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-    }
-    if (window.StatusBar) {
-      // org.apache.cordova.statusbar required
-      StatusBar.styleDefault();
-    }
-  });
+.run(function ($ionicPlatform, $rootScope, $ionicLoading) {
+    // Ionic hybrid app stuff
+    $ionicPlatform.ready(function () {
+        // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
+        // for form inputs)
+        if (window.cordova && window.cordova.plugins.Keyboard) {
+            cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+        }
+        if (window.StatusBar) {
+            // org.apache.cordova.statusbar required
+            StatusBar.styleDefault();
+        }
+    });
+    // loading indicator while $http request
+    $rootScope.$on('loading:show', function () {
+        $ionicLoading.show({
+            template: '<ion-spinner></ion-spinner>',
+            noBackdrop: true
+        })
+    })
+    $rootScope.$on('loading:hide', function () {
+        $ionicLoading.hide()
+    })
 })
 
 // config like routes
-.config(function ($stateProvider, $urlRouterProvider) {
+.config(function ($stateProvider, $urlRouterProvider, $httpProvider, uiGmapGoogleMapApiProvider) {
 
     // routes
     $stateProvider
@@ -46,29 +57,61 @@ angular.module('mvg', ['ionic', 'ngSanitize', 'ngStorage', 'ngOrderObjectBy', 'm
       }
   })
   .state('app.places', {
-        url: "/local/:country/:city",
-        views: {
-            'menuContent': {
-                templateUrl: "app/components/local/places/LocalPlacesView.html",
-                controller: 'LocalPlacesController'
-            }
-        }
+      url: "/local/:country/:city",
+      views: {
+          'menuContent': {
+              templateUrl: "app/components/local/places/LocalPlacesView.html",
+              controller: 'LocalPlacesController'
+          }
+      }
   })
-  .state('app.place', {
-        url: "/place/:place",
-        views: {
-            'menuContent': {
-                templateUrl: "app/components/place/PlaceView.html",
-                controller: 'PlaceController'
+ .state('app.place', {
+     url: "/place/:place",
+     views: {
+         'menuContent': {
+             templateUrl: "app/components/place/PlaceView.html",
+             controller: 'PlaceController'
+         }
+     }
+ }).state('app.search', {
+     url: "/search",
+     views: {
+         'menuContent': {
+             templateUrl: "app/components/search/SearchView.html",
+             controller: 'SearchController'
+         }
+     }
+ });
+
+    // if none of the above states are matched, use this as the fallback
+    $urlRouterProvider.otherwise('/app/local');
+
+    // loading indicator while $http request
+    $httpProvider.interceptors.push(function ($rootScope) {
+        return {
+            request: function (config) {
+                $rootScope.$broadcast('loading:show')
+                return config
+            },
+            response: function (response) {
+                $rootScope.$broadcast('loading:hide')
+                return response
             }
         }
-    });
-  // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/app/local');
+    })
+
+    // google maps
+    uiGmapGoogleMapApiProvider.configure({
+        key: 'AIzaSyB16sGmIekuGIvYOfNoW9T44377IU2d2Es',
+        v: '3.17',
+        libraries: '',
+        language: 'en',
+        sensor: 'false',
+    })
 });
 
 // AppController
-angular.module('mvg.general', []).controller('AppController', function ($scope, $rootScope) {
+angular.module('mvg.general', []).controller('AppController', function ($scope, $rootScope, $localStorage) {
 
     // With the new view caching in Ionic, Controllers are only called
     // when they are recreated or on app start, instead of every page change.
@@ -76,5 +119,9 @@ angular.module('mvg.general', []).controller('AppController', function ($scope, 
     // listen for the $ionicView.enter event:
     //$scope.$on('$ionicView.enter', function(e) {
     //});
+    $scope.clearCache = function () {
+        $localStorage.$reset();
+        console.log("Cache cleared");
+    }
 
 })

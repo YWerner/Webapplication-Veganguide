@@ -17,11 +17,13 @@ angular.module('mvg.place', []).controller('PlaceController', function ($scope, 
             $ionicScrollDelegate.scrollBy(0, 250, true); // scroll down 250px
         }, 750); // after 750ms, so DOM already created
     };
-    $scope.$watch('place.data', function (value) {  // watch for changes on the data of place
+    $scope.$watch('place.data.rating.rating', function (value) {  // watch for changes on the data of place
         // create a collectio of numbers long as the rating amount, for repeat the stars in the template
         $scope.rating = [];
-        for (i = 1; i <= $scope.place.data.rating.rating; i++) {
-            $scope.rating.push(i);
+        if ($scope.place.data.rating.rating) {
+            for (i = 1; i <= $scope.place.data.rating.rating; i++) {
+                $scope.rating.push(i);
+            }
         }
     });
 

@@ -1,6 +1,6 @@
 /**
  * @ngdoc service
- * @name app.api.apiService
+ * @name app.api.ApiService
  * @description
  * Service for communication with the API.
  * 
@@ -27,7 +27,9 @@ angular.module('mvg.api', []).factory('ApiService', ['$http', '$localStorage', '
 		listCities: 600,
 		listPlacesByCity: 600,
 		getInfo: 600,
-		getComments: 600
+		getComments: 600,
+		getImage: 600,
+        searchByCoords: 600
 	};
 
 	/** 
@@ -99,7 +101,7 @@ angular.module('mvg.api', []).factory('ApiService', ['$http', '$localStorage', '
 	/** 
 	 * @ngdoc function
 	 * @name safe
-	 * @methodOf app.api.apiService
+	 * @methodOf app.api.ApiService
 	 * @private
 	 * @description
 	 * Decode the string into a safe placeholder.
@@ -152,7 +154,7 @@ angular.module('mvg.api', []).factory('ApiService', ['$http', '$localStorage', '
 		/** 
 		 * @ngdoc method
 		 * @name listCountries
-		 * @methodOf app.api.apiService
+		 * @methodOf app.api.ApiService
 		 * @description
 		 * Executes a callback with a list of all countries as parameter
 		 *
@@ -177,7 +179,7 @@ angular.module('mvg.api', []).factory('ApiService', ['$http', '$localStorage', '
 		/** 
 		 * @ngdoc method
 		 * @name listCities
-		 * @methodOf app.api.apiService
+		 * @methodOf app.api.ApiService
 		 * @description
 		 * Executes a callback with a list of all cities as parameter
 		 *
@@ -202,7 +204,7 @@ angular.module('mvg.api', []).factory('ApiService', ['$http', '$localStorage', '
 		/** 
 		 * @ngdoc method
 		 * @name listPlacesByCity
-		 * @methodOf app.api.apiService
+		 * @methodOf app.api.ApiService
 		 * @description
 		 * Executes a callback with a list of all places as parameter
 		 *
@@ -228,7 +230,7 @@ angular.module('mvg.api', []).factory('ApiService', ['$http', '$localStorage', '
 		/** 
 		 * @ngdoc method
 		 * @name getInfo
-		 * @methodOf app.api.apiService
+		 * @methodOf app.api.ApiService
 		 * @description
 		 * Executes a callback with all data of a place as parameter
 		 *
@@ -247,7 +249,7 @@ angular.module('mvg.api', []).factory('ApiService', ['$http', '$localStorage', '
 		/** 
 		 * @ngdoc method
 		 * @name getComments
-		 * @methodOf app.api.apiService
+		 * @methodOf app.api.ApiService
 		 * @description
 		 * Executes a callback with all comments of a place as parameter
 		 *
@@ -266,7 +268,7 @@ angular.module('mvg.api', []).factory('ApiService', ['$http', '$localStorage', '
 		/** 
 		 * @ngdoc method
 		 * @name getImage
-		 * @methodOf app.api.apiService
+		 * @methodOf app.api.ApiService
 		 * @description
 		 * Executes a callback with the URL to an image of this place as parameter
 		 *
@@ -279,6 +281,27 @@ angular.module('mvg.api', []).factory('ApiService', ['$http', '$localStorage', '
 			get(
 				this.url + 'veganguide/local/' + safe(this.lang) + '/place/' + safe(place) + '/action/image/width/' + safe(width), // url to the api call
 				'getImage',  // api function name
+				callback // callback which gets called with data
+			);
+		},
+
+	    /** 
+		 * @ngdoc method
+		 * @name searchByCoords
+		 * @methodOf app.api.ApiService
+		 * @description
+		 * Executes a callback with the result of the search by geocoords as parameter .
+		 *
+		 * @see {@link http://veganguide.org/api|vg.search.byCoords}
+		 * @param {int} longitude - Longitude
+         * @param {int} latitude - Latitude
+         * @param {int} radius - Radius in km (max 250)
+		 * @param {fn} callback - Function to execute
+		 */
+		searchByCoords: function (longitude, latitude, radius, callback) {
+		    get(
+				this.url + 'veganguide/local/' + safe(this.lang) + '/lon/' + safe(longitude) + '/lat/' + safe(latitude) + '/radius/' + safe(radius), // url to the api call
+				'searchByCoords',  // api function name
 				callback // callback which gets called with data
 			);
 		}

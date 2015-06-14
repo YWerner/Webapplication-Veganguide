@@ -1,0 +1,61 @@
+﻿
+<ion-view>
+    <ion-nav-title>Umkreissuche</ion-nav-title>
+    <ion-nav-buttons side="right">
+        <button class="button button-icon button-clear ion-wrench" ng-click="toggleOptions()"></button>
+    </ion-nav-buttons>
+    <ion-side-menus enable-menu-with-back-views="false" delegate-handle="search-menu">
+        <ion-side-menu-content>
+            <ion-content>
+                <ion-list>
+                    <!-- Search box -->
+                    <div class="bar bar-header item-input-inset">
+                        <label class="item-input-wrapper">
+                            <i class="icon ion-ios-search placeholder-icon"></i>
+                            <input type="search" placeholder="Aktueller Ort" ng-model="lookup.input">
+                        </label>
+                        <button class="button button-clear" ng-click="doLookup()">Los</button>
+                    </div>
+                    <!-- Result as list -->
+                    <div ng-if="!lookup.map">
+                        <ion-item collection-repeat="place in search.data" ng-href="#/app/place/{{place.identifier}}">
+                            <span ng-bind-html="place.name"></span> <span class="badge badge-balanced" ng-if="place.distance">{{place.distance}} km</span>
+                            <p><span ng-bind-html="place.verbose.address"></span>, <span ng-bind-html="place.verbose.city"></span></p>
+                        </ion-item>
+                    </div>
+                    <!-- Search did nothing found -->
+                    <div class="bar bar-assertive" ng-if="search.data && search.data.length == 0">
+                        <h2 class="title">Nichts gefunden...</h2>
+                    </div>
+                </ion-list>
+                <!-- Result as map -->
+                <div id="map_canvas" ng-if="lookup.map"> 
+                    <ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" options="mapOptions">
+                        <ui-gmap-markers models="lookup.markers" coords="'self'" icon="'icon'"> <!-- options="{labelClass:'marker_labels',labelAnchor:'12 60',labelContent:'title'}" -->
+                        </ui-gmap-markers>
+                    </ui-gmap-google-map>
+                </div>
+            </ion-content>
+        </ion-side-menu-content>
+        <ion-side-menu side="right">
+            <ion-content>
+                <ion-list>
+                    <ion-item class="item-divider">Optionen</ion-item>
+                    <ion-toggle ng-model="lookup.map" toggle-class="toggle-balanced">Karte nutzen</ion-toggle>
+                    <div class="item range range-positive">
+                        <i class="ion-ios-location-outline"></i>
+                        <input type="range" name="volume" min="0" max="250" ng-model="lookup.radius">
+                        <i class="ion-ios-location"></i>
+                    </div>
+                    <label class="item item-input">
+                        <span class="input-label">Radius (km): </span>
+                        <input type="text" ng-model="lookup.radius" type="number">
+                    </label>
+                </ion-list>
+            </ion-content>
+        </ion-side-menu>
+    </ion-side-menus>
+</ion-view>
+
+
+

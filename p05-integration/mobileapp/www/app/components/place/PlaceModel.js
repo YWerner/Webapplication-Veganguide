@@ -9,9 +9,9 @@
  * @param {string} Service name
  * @param {string} ApiService
  * @param {fn} Factory function with any parameter defined so far
- * @returns {object} PlaceList 
+ * @returns {object} Place 
  */
-angular.module('mvg.local').factory('Place', ['ApiService', function(ApiService) {
+angular.module('mvg.place').factory('Place', ['ApiService', function (ApiService) {
 
 	/**
 	 * @ngdoc function

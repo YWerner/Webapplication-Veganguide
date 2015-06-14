@@ -10,7 +10,14 @@
     <link href="css/ionic.app.css" rel="stylesheet">
     -->
     <!-- remote logging -->
-    <!--<script src="http://jsconsole.com/remote.js?371D7412-1945-4778-B0FF-CA359F68C9D6"></script>-->
+    <script src="http://jsconsole.com/remote.js?371D7412-1945-4778-B0FF-CA359F68C9D6"></script>
+    <!-- fallback / emulators -->
+    <!--
+    <script src="lib/shim/es5-shim.min.js"></script>
+    <script src="lib/shim/eventShim.js"></script>
+    <script src="lib/shim/html5shiv.js"></script>
+    <script src="lib/shim/json3.min.js"></script>
+     -->
     <!-- ionic/angularjs js -->
     <script src="lib/ionic/js/ionic.bundle.js"></script>
     <!-- cordova script (this will be a 404 during development) -->
@@ -22,6 +29,10 @@
     <script src="lib/platforms/windows/winstore-jscompat.js"></script>
     <!-- app / 3rd party -->
     <script src="lib/misc/ngStorage.min.js"></script>
+    <script src="lib/misc/angularjs-geolocation.min.js"></script>
+    <!-- app / 3rd party / google maps -->
+    <script src="lib/misc/angular-google-maps.min.js"></script>
+    <script src="lib/misc/lodash.min.js"></script>
     <!-- app / general -->
     <script src="app/app.js"></script>
     <!-- app / shared / api -->
@@ -40,6 +51,9 @@
     <!-- app / place -->
     <script src="app/components/place/PlaceController.js"></script>
     <script src="app/components/place/PlaceModel.js"></script>
+    <!-- app / search -->
+    <script src="app/components/search/SearchController.js"></script>
+    <script src="app/components/search/SearchModel.js"></script>
 </head>
 <body ng-app="mvg">
     <ion-nav-view></ion-nav-view>
