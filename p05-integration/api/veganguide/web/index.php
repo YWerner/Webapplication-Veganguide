@@ -1,4 +1,6 @@
 <?php 
+header("Access-Control-Allow-Origin: *");
+
 require_once __DIR__.'/../vendor/autoload.php';
 
 $app = new Silex\Application();
@@ -25,6 +27,10 @@ $app->get('api/veganguide/local/{lang}/place/{place}/action/info', 'Api\Controll
 $app->get('api/veganguide/local/{lang}/place/{place}/action/comments', 'Api\Controller\VeganController::getComments');
 
 $app->get('api/veganguide/local/{lang}/place/{place}/action/image/width/{width}', 'Api\Controller\VeganController::getImage');
+
+$app->get('api/veganguide/local/{lang}/blog', 'Api\Controller\VeganController::getBlogThemes');
+
+$app->get('api/veganguide/local/{lang}/blog/identifier/{identifier}', 'Api\Controller\VeganController::getBlogComments');
 /*
 $app->get('veganguide/suche/{value}', function ($id) {
 

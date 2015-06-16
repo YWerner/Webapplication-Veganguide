@@ -18,6 +18,7 @@ class VeganModel extends XmlModel {
 	private $_query;
 	private $_width;
 	private $_answerparams;
+	private $_identifier;
 	
 	public function __set($variable, $value)
 	{
@@ -128,6 +129,63 @@ class VeganModel extends XmlModel {
         $response = $this->_doApiCall($method, $data);
         return $response;
     }
+	
+	public function getBlogThemes()
+	{
+		$dom_document = new \DOMDocument();
+		$dom_document->loadHTMLFile("http://veganguide.org/blog");
+		$xpath = new \DOMXpath($dom_document);
+		$elements = $xpath->query("//div[@class='item']");
+		$count=0;
+		$response['status']='ok';
+		foreach ($elements as $element)
+		{
+			$blog[$count]["head"]=$xpath->query("h3/a" , $element)->item(0)->nodeValue;
+			$blog[$count]["supplier"]=$xpath->query("p/a" , $element)->item(0)->nodeValue;
+			$blog[$count]["href"]=$xpath->query("h3/a/@href" , $element)->item(0)->nodeValue;
+			$blog[$count]["body"]=$xpath->query("p" , $element)->item(1)->nodeValue;
+			$identifier=explode("http://veganguide.org/blog/", $blog[$count]["href"]);
+			if(count($identifier)>1)
+			{
+				$blog[$count]["identifier"]=$identifier[1];
+			}
+			else
+			{
+				$blog[$count]["identifier"]=null;
+			}
+			$count++;
+		}
+		$response['data']=$blog;
+		
+		return $response;
+	}
+	
+	public function getBlogComments()
+	{
+		$identifier = $this->_identifier;
+		$dom_doc_comments = new \DOMDocument();
+		$dom_doc_comments->loadHTMLFile("http://veganguide.org/blog/".$identifier);
+		$xpath_comments = new \DOMXpath($dom_doc_comments);
+		
+		$elements = $xpath_comments->query("//div[@class='item']");
+		$count=0;
 
+		$doc_comments = $xpath_comments->query("//div[@class='item']");
+		$comments_index=-1;
+		$response['status']='ok';
+		foreach ($doc_comments as $com)
+		{
+			if($comments_index>-1)
+			{
+				$comments[$comments_index]["supplier"]=$xpath_comments->query("h4/a" , $com)->item(0)->nodeValue;
+				$comments[$comments_index]["body"]=$xpath_comments->query("blockquote" , $com)->item(0)->nodeValue;
+				$comments[$comments_index]["date"]=$xpath_comments->query("h4/span" , $com)->item(0)->nodeValue;
+				$comments[$comments_index]["supplier_img"]=($xpath_comments->query("img/@src" , $com)->length>0) ? $xpath_comments->query("img/@src" , $com)->item(0)->nodeValue : null;
+			}
+			$comments_index++;
+		}
+		$response['data']=$comments;
+		return $response;
+	}
 }
 ?>

@@ -163,6 +163,41 @@ class VeganController {
 			return $app->json($result);
 		}
     }
+	
+	public function getBlogThemes(Request $request, Application $app)
+	{
+		$cachefile = $this->_cache->_getCacheFileName($request);
+		$json = $this->_cache->_getcache($cachefile);
+		if($json!==false)
+		{
+			return $json;
+		}
+		else
+		{
+			$blog = $this->_model->getBlogThemes();
+			$json=json_encode($blog);
+			$this->_cache->_writecache($cachefile, $json);
+			return $app->json($blog);
+		}
+	}
+	
+	public function getBlogComments(Request $request, Application $app)
+	{
+		$cachefile = $this->_cache->_getCacheFileName($request);
+		$json = $this->_cache->_getcache($cachefile);
+		if($json!==false)
+		{
+			return $json;
+		}
+		else
+		{
+			$this->_model->identifier = ($request->attributes->get('identifier') ? $request->attributes->get('identifier') : null);
+			$comments = $this->_model->getBlogComments();
+			$json=json_encode($comments);
+			$this->_cache->_writecache($cachefile, $json);
+			return $app->json($comments);
+		}
+	}
 }
 
 ?>
