@@ -129,6 +129,35 @@ class VeganModel extends XmlModel {
         $response = $this->_doApiCall($method, $data);
         return $response;
     }
+    
+    public function getNewPlaces()
+    {
+        $filename = 'http://veganguide.org/feeds/places';
+        
+	    // Feed laden
+	    if( !$xml = simplexml_load_file($filename) ) {
+	        die('Fehler beim Einlesen der XML Datei!');
+	    }
+	    
+	    // Items vorhanden?
+	    if( !isset($xml->channel->item) ) {
+	        die('Keine Items vorhanden!');
+	    }
+	    
+	    $return = array('status' => 'ok', 'data' => array());
+
+	    foreach($xml->channel->item as $item) {
+	    	$link = explode('/', $item->link);
+	        $title = explode('(', $item->title);
+	        $return['data'][] = array(
+	        	'identifier' => $link[(count($link)-1)],
+	        	'name' => ($title[0]),
+	        	'city' => (substr($title[1], 0, -1)),
+	        	'description' => trim($item->description)
+	        );
+	    }
+	    return $return;
+    }
 	
 	public function getBlogThemes()
 	{

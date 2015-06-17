@@ -6,8 +6,6 @@ require_once __DIR__.'/../vendor/autoload.php';
 $app = new Silex\Application();
 $app['debug'] = true;
 
-//$app['autoloader']->registerNamespace('Api', __DIR__.'/../src');
-
 $app->get('veganguide/', function() use ($app) {
     echo 'API Veganguide Mobile';
 });
@@ -28,34 +26,10 @@ $app->get('api/veganguide/local/{lang}/place/{place}/action/comments', 'Api\Cont
 
 $app->get('api/veganguide/local/{lang}/place/{place}/action/image/width/{width}', 'Api\Controller\VeganController::getImage');
 
+$app->get('api/veganguide/newplaces', 'Api\Controller\VeganController::listNewPlaces');
+
 $app->get('api/veganguide/local/{lang}/blog', 'Api\Controller\VeganController::getBlogThemes');
 
 $app->get('api/veganguide/local/{lang}/blog/identifier/{identifier}', 'Api\Controller\VeganController::getBlogComments');
-/*
-$app->get('veganguide/suche/{value}', function ($id) {
 
-    $xml = xmlrpc_encode_request(
-        'vg.browse.listPlacesByCity',
-        array(
-            'apikey' => 'btlvbcwm31hn',
-            'lang' => 'de',
-            'city' => $id,
-            'country' => 'germany'
-        )
-    );
-    echo $xml;
-
-    $context = stream_context_create(array('http' => array(
-        'method' => "POST",
-        'header' => "Content-Type: text/xml",
-        'content' => $xml
-    )));
-    
-    $file = file_get_contents("http://veganguide.org/api'", false, $context);
-    $response = xmlrpc_decode($file);
-    echo '<pre>'; var_dump($response);
-    
-    return $id;
-});
-*/
 $app->run();

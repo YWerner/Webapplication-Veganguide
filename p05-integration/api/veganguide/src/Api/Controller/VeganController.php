@@ -72,6 +72,7 @@ class VeganController {
 			$this->_model->answerparams = array("rating", "comments", "submitter", "address", "city", "country", "coords");
 			
 			$result = $this->_model->getPlacesByCity();
+			echo '<pre>'; var_dump($result); 
 			$json=json_encode($result);
 			$this->_cache->_writecache($cachefile, $json);
 			return $app->json($result);
@@ -163,6 +164,23 @@ class VeganController {
 			return $app->json($result);
 		}
     }
+    
+    public function listNewPlaces(Request $request, Application $app)
+    {
+    	$cachefile = $this->_cache->_getCacheFileName($request);
+    	$json = $this->_cache->_getcache($cachefile);
+		if($json!==false)
+		{
+			return $json;
+		}
+		else
+		{
+    		$result = $this->_model->getNewPlaces();
+    		$json=json_encode($result);
+			$this->_cache->_writecache($cachefile, $json);
+			return $app->json($result);
+		}
+    }
 	
 	public function getBlogThemes(Request $request, Application $app)
 	{
@@ -174,6 +192,7 @@ class VeganController {
 		}
 		else
 		{
+
 			$blog = $this->_model->getBlogThemes();
 			$json=json_encode($blog);
 			$this->_cache->_writecache($cachefile, $json);
