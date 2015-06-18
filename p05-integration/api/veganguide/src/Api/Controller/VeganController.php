@@ -152,7 +152,7 @@ class VeganController {
 		{
 			$this->_model->lang = ($request->attributes->get('lang') ? $request->attributes->get('lang') : "de");
 			$this->_model->query = array(
-										"lon" => ($request->attributes->get('long') ? $request->attributes->get('long') : 12.3333333),
+										"lon" => ($request->attributes->get('lon') ? $request->attributes->get('lon') : 12.3333333),
 										"lat" => ($request->attributes->get('lat') ? $request->attributes->get('lat') : 51.3),
 										"radius" => ($request->attributes->get('radius') ? $request->attributes->get('radius') : 20)
 										);
