@@ -1,4 +1,4 @@
-angular.module('mvg', ['ionic', 'ngSanitize', 'ngStorage', 'ngOrderObjectBy', 'geolocation', 'uiGmapgoogle-maps', 'mvg.api', 'mvg.general', 'mvg.local', 'mvg.place', 'mvg.search'])
+angular.module('mvg', ['ionic', 'ngSanitize', 'ngStorage', 'ngOrderObjectBy', 'ngMap', 'ion-google-place', 'geolocation', 'mvg.api', 'mvg.general', 'mvg.local', 'mvg.place', 'mvg.search']) // 'uiGmapgoogle-maps', 
 
 // run
 .run(function ($ionicPlatform, $rootScope, $ionicLoading) {
@@ -27,7 +27,7 @@ angular.module('mvg', ['ionic', 'ngSanitize', 'ngStorage', 'ngOrderObjectBy', 'g
 })
 
 // config like routes
-.config(function ($stateProvider, $urlRouterProvider, $httpProvider, uiGmapGoogleMapApiProvider) {
+.config(function ($stateProvider, $urlRouterProvider, $httpProvider) { // , uiGmapGoogleMapApiProvider
 
     // routes
     $stateProvider
@@ -100,14 +100,6 @@ angular.module('mvg', ['ionic', 'ngSanitize', 'ngStorage', 'ngOrderObjectBy', 'g
         }
     })
 
-    // google maps
-    uiGmapGoogleMapApiProvider.configure({
-        key: 'AIzaSyB16sGmIekuGIvYOfNoW9T44377IU2d2Es',
-        v: '3.17',
-        libraries: '',
-        language: 'en',
-        sensor: 'false',
-    })
 });
 
 // AppController

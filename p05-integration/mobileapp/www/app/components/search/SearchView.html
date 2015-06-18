@@ -2,7 +2,7 @@
 <ion-view>
     <ion-nav-title>Umkreissuche</ion-nav-title>
     <ion-nav-buttons side="right">
-        <button class="button button-icon button-clear ion-wrench" ng-click="toggleOptions()"></button>
+        <button class="button button-icon button-clear ion-map" ng-click="toggleOptions()"></button>
     </ion-nav-buttons>
     <ion-side-menus enable-menu-with-back-views="false" delegate-handle="search-menu">
         <ion-side-menu-content>
@@ -12,9 +12,9 @@
                     <div class="bar bar-header item-input-inset">
                         <label class="item-input-wrapper">
                             <i class="icon ion-ios-search placeholder-icon"></i>
-                            <input type="search" placeholder="Aktueller Ort" ng-model="lookup.input">
+                            <ion-google-place placeholder="{{lookup.input.formatted_address}}" search-placeholder="{{lookup.input.formatted_address}}" label-cancel="Abbruch" ng-model="lookup.input">
                         </label>
-                        <button class="button button-clear" ng-click="doLookup()">Los</button>
+                        <button class="button button-icon ion-ios-location" ng-click="centerOnUser()"></button>
                     </div>
                     <!-- Result as list -->
                     <div ng-if="!lookup.map">
@@ -27,30 +27,49 @@
                     <div class="bar bar-assertive" ng-if="search.data && search.data.length == 0">
                         <h2 class="title">Nichts gefunden...</h2>
                     </div>
+                    <!-- Could not get user position -->
+                    <div class="bar bar-assertive" ng-if="!search.position.status">
+                        <h2 class="title">Aktueller Ort nicht ermittelbar...</h2>
+                    </div>
                 </ion-list>
-                <!-- Result as map -->
-                <div id="map_canvas" ng-if="lookup.map"> 
-                    <ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" options="mapOptions">
-                        <ui-gmap-markers models="lookup.markers" coords="'self'" icon="'icon'"> <!-- options="{labelClass:'marker_labels',labelAnchor:'12 60',labelContent:'title'}" -->
-                        </ui-gmap-markers>
-                    </ui-gmap-google-map>
+                <div class="mapWrap" data-tap-disabled="true" ng-show="lookup.map">
+                    <map center="51.312834,12.376058" zoom="12" disable-default-u-i="true" zoom-control="true" scale-control="true">
+                        <marker position="{{search.position.latitude}},{{search.position.longitude}}"
+                                title="Gesuchte Position"
+                                icon="http://maps.google.com/mapfiles/kml/pushpin/grn-pushpin.png"
+                                ng-if="search.position.latitude && search.position.longitude">
+                        </marker>
+                        <marker ng-repeat="item in search.data"
+                                position="{{item.coords.lat}},{{item.coords.lon}}"
+                                title="{{item.name}}"
+                                on-click="showInfoWindow(event, item)"
+                                >
+                        </marker>
+                    </map>
                 </div>
             </ion-content>
         </ion-side-menu-content>
         <ion-side-menu side="right">
             <ion-content>
                 <ion-list>
-                    <ion-item class="item-divider">Optionen</ion-item>
+                    <ion-item class="item-divider">Suchoptionen</ion-item>
                     <ion-toggle ng-model="lookup.map" toggle-class="toggle-balanced">Karte nutzen</ion-toggle>
+                    <label class="item item-input item-select">
+                        <span class="input-label">Radius:</span>
+                        <select ng-model="lookup.radius" id="radius-select">
+                            <option selected>{{lookup.radius}} km</option>
+                            <option>1 km</option>
+                            <option>5 km</option>
+                            <option>10 km</option>
+                            <option>25 km</option>
+                            <option>50 km</option>
+                        </select>
+                    </label>
                     <div class="item range range-positive">
                         <i class="ion-ios-location-outline"></i>
-                        <input type="range" name="volume" min="0" max="250" ng-model="lookup.radius">
+                        <input type="range" name="volume" min="0" max="50" ng-model="lookup.radius">
                         <i class="ion-ios-location"></i>
                     </div>
-                    <label class="item item-input">
-                        <span class="input-label">Radius (km): </span>
-                        <input type="text" ng-model="lookup.radius" type="number">
-                    </label>
                 </ion-list>
             </ion-content>
         </ion-side-menu>

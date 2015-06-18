@@ -6,6 +6,7 @@
 
  */
 angular.module('mvg.place', []).controller('PlaceController', function ($scope, $stateParams, $timeout, $ionicScrollDelegate, Place) {
+    $scope.rating = [];
     $scope.place = new Place($stateParams.place); // get the Place model
     $scope.showComments = false; // dont show comments as page loads
     $scope.toggleComments = function () { // trigger for comments loading
@@ -19,8 +20,7 @@ angular.module('mvg.place', []).controller('PlaceController', function ($scope, 
     };
     $scope.$watch('place.data.rating.rating', function (value) {  // watch for changes on the data of place
         // create a collectio of numbers long as the rating amount, for repeat the stars in the template
-        $scope.rating = [];
-        if ($scope.place.data.rating.rating) {
+        if ($scope.place.data && $scope.place.data.rating && $scope.place.data.rating.rating) {
             for (i = 1; i <= $scope.place.data.rating.rating; i++) {
                 $scope.rating.push(i);
             }
