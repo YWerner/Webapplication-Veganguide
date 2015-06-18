@@ -7,7 +7,7 @@
     <ion-side-menus enable-menu-with-back-views="false" delegate-handle="search-menu">
         <ion-side-menu-content>
             <ion-content>
-                <ion-list>
+                <ion-list >
                     <!-- Search box -->
                     <div class="bar bar-header item-input-inset">
                         <label class="item-input-wrapper">
@@ -28,22 +28,21 @@
                         <h2 class="title">Nichts gefunden...</h2>
                     </div>
                     <!-- Could not get user position -->
-                    <div class="bar bar-assertive" ng-if="!search.position.status">
+                    <div class="bar bar-assertive" ng-if="!search.geostatus">
                         <h2 class="title">Aktueller Ort nicht ermittelbar...</h2>
                     </div>
                 </ion-list>
-                <div class="mapWrap" data-tap-disabled="true" ng-show="lookup.map">
+                <div scroll="false" class="mapWrap" data-tap-disabled="true" ng-if="lookup.map">
                     <map center="51.312834,12.376058" zoom="12" disable-default-u-i="true" zoom-control="true" scale-control="true">
-                        <marker position="{{search.position.latitude}},{{search.position.longitude}}"
+                        <marker position="{{search.position.geometry.location.A}},{{search.position.geometry.location.F}}"
                                 title="Gesuchte Position"
                                 icon="http://maps.google.com/mapfiles/kml/pushpin/grn-pushpin.png"
-                                ng-if="search.position.latitude && search.position.longitude">
+                                ng-if="search.position.geometry.location.A && search.position.geometry.location.F">
                         </marker>
                         <marker ng-repeat="item in search.data"
                                 position="{{item.coords.lat}},{{item.coords.lon}}"
                                 title="{{item.name}}"
-                                on-click="showInfoWindow(event, item)"
-                                >
+                                on-click="showInfoWindow(event, item)">
                         </marker>
                     </map>
                 </div>

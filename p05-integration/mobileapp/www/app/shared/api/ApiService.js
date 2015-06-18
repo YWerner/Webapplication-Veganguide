@@ -51,6 +51,7 @@ angular.module('mvg.api', []).factory('ApiService', ['$http', '$localStorage', '
 		var now = new Date(); // current date and time
 		// log
 		console.log("API: " + fn + ": Called (ExpirationTime = " + expirationTime[fn] + " seconds.)");
+		console.log("API: url = " + url);
 		if($localStorage[url] && $localStorage[url].loadTime) console.log("API: " + fn + ": Last load on " + $localStorage[url].loadTime + ". This is " + ((now - Date.parse($localStorage[url].loadTime)) / 1000) + " seconds ago.");
 		// cached empty/invalid/expired
 		if(!$localStorage[url] // not cached before

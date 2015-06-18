@@ -5,19 +5,18 @@
 * Controller for the search page.
 
 */
-angular.module('mvg.search', []).controller('SearchController', function ($scope, $rootScope, $stateParams, $ionicSideMenuDelegate, $ionicLoading, geolocation, Search) {
+angular.module('mvg.search', []).controller('SearchController', function ($scope, $rootScope, $stateParams, $ionicSideMenuDelegate, Search) {
 
     // Settings and setup
     $scope.lookup = {
-        radius: 25, // in km
+        radius: 5, // in km
         input: { formatted_address: "Straße und Ort" }, // default input
-        map: true, // default use list
-        mapInitalized: false,
-        marker: [] // array of marker on the map
+        map: true // default use list
     }
 
     // Create data model
     $scope.search = new Search();
+    $scope.search.radius = $scope.lookup.radius;
 
     /**
      * @ngdoc method
@@ -29,7 +28,6 @@ angular.module('mvg.search', []).controller('SearchController', function ($scope
     $scope.$on('mapInitialized', function (event, map) {
         console.log("Map: Map initialized");
         $scope.map = map; // store in $scope
-        $scope.lookup.mapInitalized = true;
     });
 
     /**
@@ -56,40 +54,11 @@ angular.module('mvg.search', []).controller('SearchController', function ($scope
         $rootScope.$broadcast('loading:show'); // show
         // get user location as coords and as address
         $scope.search.getCurrentPosition(
-            function () { // success
-                $scope.map.setCenter($scope.search.position.LatLng); // center map on user position
-                $scope.lookup.input = $scope.search.position.location; // store address as input of the search field (ToDo: currently just the label value got changed)
-                $scope.doLookup(function () { // load restaurants near the user
-                    $rootScope.$broadcast('loading:hide'); // hide load screen after loading
-                });
+            function (position) { // success
+                $scope.lookup.input = position;
+                $rootScope.$broadcast('loading:hide'); // hide load screen after loading
             }, function () { // failed
                 $rootScope.$broadcast('loading:hide'); // hide load screen
-            }
-        );
-    };
-
-    /**
-    * @ngdoc method
-    * @name doLookup
-    * @methodOf app.search.SearchController
-    * @description
-    * Get trigger by change of the search input field, or gets called by the self-localization of an user.
-    *
-    * @param {fn} callback - Callback function
-    */
-    $scope.doLookup = function (callback) {
-        console.log($scope.lookup.input);
-        console.log($scope.lookup.input.geometry.location.A);
-        console.log($scope.lookup.input.geometry.location.F);
-        $scope.search.load( // load restaurants around coords
-            $scope.lookup.input.geometry.location.A,
-            $scope.lookup.input.geometry.location.F,
-            //$scope.search.position.longitude,
-            //$scope.search.position.latitude,
-            $scope.lookup.radius,
-            function (search) { // call back
-                console.log($scope.search);
-                callback();
             }
         );
     };
@@ -116,30 +85,30 @@ angular.module('mvg.search', []).controller('SearchController', function ($scope
         infowindow.open($scope.map);
     };
 
+    /**
+    * @ngdoc method
+    * @name watchLookupInput
+    * @methodOf app.search.SearchController
+    * @description
+    * Get called whenever lookup.input model gets changed.
+    * Mostly after centerOnUser or after the user typed an address.
+    *
+    * @param {object} value - input model
+    */
     $scope.$watch('lookup.input', function (value) {  // watch for changes on the data of place
-        console.log("Map: Input changed to: " + value);
-        if ($scope.lookup.mapInitalized) {
-            console.log("Map: Lookup for address");
+        console.log("Map: Input changed");
+        $scope.search.position = value;
+        if ($scope.map) {
             // loading screen
             $rootScope.$broadcast('loading:show'); // show
-            // get user location as coords and as address
-            $scope.search.getCurrentPosition(
-                function () { // success
-                    $scope.doLookup(function () { // load restaurants near the user
-                        $rootScope.$broadcast('loading:hide'); // hide load screen after loading
-                    });
-                }, function () { // failed
-                    $rootScope.$broadcast('loading:hide'); // hide load screen
-                }
-            );
-        }
-    });
-
-    $scope.$watch('lookup.map', function (value) {  // watch for changes to show/hide map
-        console.log("Map: Switch map to = " + value);
-        if (value) {
-            console.log("Map: Redraw");
-            //google.maps.event.trigger($scope.map, 'resize');
+            // change position
+            $scope.search.lookup(function (search) {
+                console.log("Map: Lookup");
+                var LatLng = new google.maps.LatLng(search.position.geometry.location.A, search.position.geometry.location.F);
+                $scope.map.setCenter(LatLng); // center map on user position
+                google.maps.event.trigger($scope.map, 'resize');
+                $rootScope.$broadcast('loading:hide'); // hide load screen after loading
+            });
         }
     });
 

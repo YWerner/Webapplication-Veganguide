@@ -11,7 +11,7 @@
  * @param {fn} Factory function with any parameter defined so far
  * @returns {object} Search 
  */
-angular.module('mvg.search').factory('Search', ['ApiService', 'geolocation', '$ionicPopup', '$http', function (ApiService, geolocation, $ionicPopup, $http) {
+angular.module('mvg.search').factory('Search', ['ApiService', function (ApiService) {
 
     /**
 	 * @ngdoc function
@@ -36,14 +36,9 @@ angular.module('mvg.search').factory('Search', ['ApiService', 'geolocation', '$i
          * Also contains a status boolean if process of getting user position failed.
 		 *
 		 */
-        this.position = {
-            latitude: null, // Latitude
-            longitude: null, // Longitude
-            address: null, // Full readable address
-            LatLng: null, // LatLng Google Maps API object
-            location: null, 
-            status: true, // status of process getting the user location
-        }
+        this.position = {};
+        this.geostatus = true;
+        this.radius = 0;
 
         /**
 		 * @ngdoc method
@@ -92,32 +87,47 @@ angular.module('mvg.search').factory('Search', ['ApiService', 'geolocation', '$i
             var self = this; // to reach this in the callbacks
             // load user location as coords using the browser
             navigator.geolocation.getCurrentPosition(function (position) { // got position
-                // store to this object
-                self.position.status = true;
-                // store geo coords
-                self.position.latitude = position.coords.latitude;
-                self.position.longitude = position.coords.longitude;
+                // store get geo status
+                self.geostatus = true;
                 // store a Google API LatLng object
-                self.position.LatLng = new google.maps.LatLng(self.position.latitude, self.position.longitude);
+                var LatLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+                // store coords
                 // load address by geo coords using Google API
                 geocoder = new google.maps.Geocoder();
-                geocoder.geocode({ 'latLng': self.position.LatLng }, function (results, status) {
+                geocoder.geocode({ 'latLng': LatLng }, function (results, status) {
                     if (status == google.maps.GeocoderStatus.OK && results[0].formatted_address) {
                         // store location object and readable address
-                        self.position.location = results[0];
-                        self.position.address = results[0].formatted_address;
+                        //self.position = results[0];
                         // now run callback
-                        callback(self); // handing over this object
+                        callback(results[0]); // handing over this object
                     } else {
-                        self.position.status = false; // error
+                        self.geostatus = false; // error
                         error_callback(self); // run error_callback handing over this object
                     }
                 });
             }, function (error) { // error
-                self.position.status = false; // error
+                self.geostatus = false; // error
                 error_callback(self); // run error_callback handing over this object
             });
         };
+
+        /*
+        * @ngdoc method
+        * @name lookup
+        * @methodOf app.search.Search
+        * @description
+        * Executes a search lookup using the parameters that were already set.
+        *
+        * @param {fn} callback - Callback get called in success case
+        */
+        this.lookup = function (callback) {
+            this.load( // load restaurants around coords
+                this.position.geometry.location.A,
+                this.position.geometry.location.F,
+                this.radius,
+                callback
+            );
+        }
 
         /**
 		 * Call constructor. 
