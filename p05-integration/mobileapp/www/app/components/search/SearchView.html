@@ -5,34 +5,23 @@
         <button class="button button-icon button-clear ion-map" ng-click="toggleOptions()"></button>
     </ion-nav-buttons>
     <ion-side-menus enable-menu-with-back-views="false" delegate-handle="search-menu">
-        <ion-side-menu-content>
-            <ion-content>
-                <ion-list >
-                    <!-- Search box -->
-                    <div class="bar bar-header item-input-inset">
-                        <label class="item-input-wrapper">
-                            <i class="icon ion-ios-search placeholder-icon"></i>
-                            <ion-google-place placeholder="{{lookup.input.formatted_address}}" search-placeholder="{{lookup.input.formatted_address}}" label-cancel="Abbruch" ng-model="lookup.input">
-                        </label>
-                        <button class="button button-icon ion-ios-location" ng-click="centerOnUser()"></button>
-                    </div>
-                    <!-- Result as list -->
+        <ion-side-menu-content ng-switch on="lookup.map">
+            <!-- Result as list -->
+            <ion-content ng-switch-when="false">
+                <ion-list>
+                    <ng-include src="'app/components/search/SearchViewInput.html'"></ng-include>
                     <div ng-if="!lookup.map">
                         <ion-item collection-repeat="place in search.data" ng-href="#/app/place/{{place.identifier}}">
                             <span ng-bind-html="place.name"></span> <span class="badge badge-balanced" ng-if="place.distance">{{place.distance}} km</span>
                             <p><span ng-bind-html="place.verbose.address"></span>, <span ng-bind-html="place.verbose.city"></span></p>
                         </ion-item>
                     </div>
-                    <!-- Search did nothing found -->
-                    <div class="bar bar-assertive" ng-if="search.data && search.data.length == 0">
-                        <h2 class="title">Nichts gefunden...</h2>
-                    </div>
-                    <!-- Could not get user position -->
-                    <div class="bar bar-assertive" ng-if="!search.geostatus">
-                        <h2 class="title">Aktueller Ort nicht ermittelbar...</h2>
-                    </div>
                 </ion-list>
-                <div scroll="false" class="mapWrap" data-tap-disabled="true" ng-if="lookup.map">
+            </ion-content>
+            <!-- Result as a map -->
+            <ion-content scroll="false" ng-switch-when="true">
+                <ng-include src="'app/components/search/SearchViewInput.html'"></ng-include>
+                <div scroll="false" class="mapWrap" data-tap-disabled="true">
                     <map center="51.312834,12.376058" zoom="12" disable-default-u-i="true" zoom-control="true" scale-control="true">
                         <marker position="{{search.position.geometry.location.A}},{{search.position.geometry.location.F}}"
                                 title="Gesuchte Position"

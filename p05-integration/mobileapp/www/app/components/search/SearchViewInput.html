@@ -1,0 +1,16 @@
+﻿<!-- Search box -->
+<div class="bar bar-header item-input-inset">
+    <label class="item-input-wrapper">
+        <i class="icon ion-ios-search placeholder-icon"></i>
+        <ion-google-place placeholder="{{lookup.input.formatted_address}}" search-placeholder="{{lookup.input.formatted_address}}" label-cancel="Abbruch" ng-model="lookup.input">
+    </label>
+    <button class="button button-icon ion-ios-location" ng-click="centerOnUser()"></button>
+</div>
+<!-- Search did nothing found -->
+<div class="bar bar-assertive" ng-if="search.data && search.data.length == 0">
+    <h2 class="title">Nichts gefunden...</h2>
+</div>
+<!-- Could not get user position -->
+<div class="bar bar-assertive" ng-if="!search.geostatus">
+    <h2 class="title">Aktueller Ort nicht ermittelbar...</h2>
+</div>
