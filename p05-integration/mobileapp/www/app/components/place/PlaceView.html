@@ -48,6 +48,8 @@
                 <h2>{{comment.submitter}}<span class="badge badge-balanced">{{comment.date.scalar | date : 'dd.MM.yy'}}</span></h2>
                 <p ng-bind-html="comment.text" class="text-wrap"></p>
             </ion-item>
+            <ion-item ng-if="showComments && !place.comments.data">Keine Kommentare vorhanden.</ion-item>
         </div>
+        <div class="padding-vertical"></div>
     </ion-content>
 </ion-view>
