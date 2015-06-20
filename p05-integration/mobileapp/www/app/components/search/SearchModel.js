@@ -121,6 +121,8 @@ angular.module('mvg.search').factory('Search', ['ApiService', function (ApiServi
         * @param {fn} callback - Callback get called in success case
         */
         this.lookup = function (callback) {
+            // reset geo status
+            this.geostatus = true;
             this.load( // load restaurants around coords
                 this.position.geometry.location.A,
                 this.position.geometry.location.F,
