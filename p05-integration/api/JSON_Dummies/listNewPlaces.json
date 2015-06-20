@@ -1,0 +1,125 @@
+{
+	"status": "ok",
+	"data": [
+		{
+			"identifier": "bioladen-naturkost-am-markt",
+			"name": "Bioladen  ",
+			"city": "Gehrden",
+			"description": "Kleiner Bioladen, in dem es auch einige vegane Produkte gibt, z.B. Schokolade und Sojamilch."
+		},
+		{
+			"identifier": "reformhaus-bacher-gehrden",
+			"name": "Reformhaus Bacher - Gehrden ",
+			"city": "Gehrden",
+			"description": "Kleines Reformhaus mit &uuml;blichem veganen Sortiment."
+		},
+		{
+			"identifier": "frioli-eismanufaktur",
+			"name": "Frioli Eismanufaktur ",
+			"city": "Gehrden",
+			"description": "Eisdiele mit vielen, vielen Sorten veganem und sehr leckerem Fruchteis (zu erkennen an den orangefarbenen Schildchen in der Auslage). Eine Kugel im Becher kostet 1,- &euro;. Das Angebot wechselt t&auml;glich aus folgenden Sorten:\r\n\r\nACE (Orange, Zitrone, Karotte)\r\nAnanas\r\nApfel \r\nAprikose\r\nBirne\r\nBlutorange\r\nErdbeere\r\nGrapefruit pink \r\nHeidelbeere\r\nHimbeere\r\nHolunder  \r\nHonigmelone\r\nJohannisbeere rot\r\nJohannisbeere schwarz\r\nKiwi\r\nLimette\r\nMandarine\r\nMango\r\nMango mit Chili\r\nMaracuja\r\nOrange\r\nPapaya\r\nPfirsich gelb\r\nPfirsich Maracuja\r\nPfirsich wei&szlig;\r\nRhabarber\r\nSauerkirsche\r\nSchlehe \r\nTropic\r\nWaldfrucht\r\nWassermelone\r\nZitrone\r\nZitrone Basilikum\r\nZwetschge&nbsp;\r\n\r\nZitat Webseite:\r\n\"Unsere Fruchteissorten sind komplett milchfrei, aus reinen Fr&uuml;chten ohne k&uuml;nstliche Aromen/Farbstoffe sowohl f&uuml;r Allergiker als auch Veganer geeignet, da keinerlei tierische Produkte oder Gluten enthalten sind. Wir arbeiten mit Reis- und Maisst&auml;rke.\""
+		},
+		{
+			"identifier": "makimaki",
+			"name": "MAKIMAKI ",
+			"city": "Münster",
+			"description": "Vegane Sushi-Bar in M&uuml;nster!"
+		},
+		{
+			"identifier": "vita-hvar",
+			"name": "Vita Hvar ",
+			"city": "Hvar",
+			"description": "Smoothies, pure juice, frozen joghurt (unfortunately dairy, no soy), only vegetarian muffins and also fresh salad! Very tasty! Enjoy!"
+		},
+		{
+			"identifier": "freundsaft",
+			"name": "FreundSaft ",
+			"city": "Freiburg",
+			"description": "Unser FreundsaftLaden ist ein bunter, gem&uuml;tlicher Platz zum Saft trinken, vegan schlemmen, dazulernen und Freunde finden. Unsere K&uuml;che bietet Soulfood &ndash; denn lebendige Nahrung mit viel Gr&uuml;n h&auml;lt uns nicht nur gesund und jung, sondern bietet ein gro&szlig;es Spektrum an neuen Gen&uuml;ssen und macht einfach gute Laune. Unsere K&uuml;che ist inspiriert von der kalifornischen RAW FOOD Kultur. Wir ziehen Sprossen und Microgreens, verarbeiten Wildkr&auml;uter und Gem&uuml;se von Biobauern aus der Umgebung, backen unser eigenes Brot, machen K&auml;se aus N&uuml;ssen, und Kuchen ohne Mehl, Eier oder Zucker. Es muss auf nichts verzichtet werden &ndash; alle Naschereien unserer Kindheit gibt es auch in gesund und noch viel leckerer."
+		},
+		{
+			"identifier": "charlies-asian-bakery-und-coffee",
+			"name": "Charlie?s Asian Bakery & Coffee ",
+			"city": "Berlin",
+			"description": "Charlie&rsquo;s bietet&nbsp;eine gro&szlig;e Auswahl an Asian-Fusion Desserts und Leckereien.&nbsp;Alle unsere Kuchen sind vegan und bio, und die meisten sind auch gluten frei.&nbsp;Wir bieten&nbsp;auch vegane vietnamesische Gerichte, frische S&auml;fte, Kaffe- und Tee."
+		},
+		{
+			"identifier": "china-asia-restaurant-sampan",
+			"name": "China-Asia Restaurant Sampan ",
+			"city": "Frankfurt am Main",
+			"description": "In unserem China-Asia Restaurant Sampan im Frankfurter Nordend m&ouml;chten wir Dir einen Ort bieten, an dem Du Dich mal kurz vom Alltagsstress erholen und Dich mit  gesunden, frisch f&uuml;r Dich zubereiteten Gerichten st&auml;rken kannst.  \r\n\n\r \r\r Daf&uuml;r haben wir beliebte, schmackhafte Gerichte aus China, Taiwan, Korea, Japan, Thailand und Vietnam ausgesucht, die unsere K&ouml;che nach traditionellen Rezepten zubereiten. \r\n\n\r \r\r Mittlerweile bieten wir zus&auml;tzlich &uuml;ber 50 vegane Gerichte in einer speziellen veganen Karte an, die Du Dir unter 'Gerichte' anschauen kannst. \r\n\n\r\r\rhier der Direktlink:&nbsp; http://www.restaurant-sampan.de/Sampan_Vegan_web2.pdf"
+		},
+		{
+			"identifier": "essbar",
+			"name": "essBAR ",
+			"city": "Lübeck",
+			"description": "T&auml;glich dienstags bis samstags frischer Mittagstisch in der L&uuml;becker Altstadt.\r\n\r\nAyurvedische und vegane Gerichte in 100% Bio!"
+		},
+		{
+			"identifier": "ajies-piru",
+			"name": "Ajies Piru ",
+			"city": "Lima",
+			"description": "Vegan Pizza, Deserts"
+		},
+		{
+			"identifier": "la-posada-del-mirador",
+			"name": "La Posada del Mirador ",
+			"city": "Lima",
+			"description": "Vegan &amp; Vegetarian Food, Great view on Lima&acute;s most turistic neighborhood. Barranco. Open for Lunch and Dinner. Drinks\r\n\n\r\r\r&nbsp;"
+		},
+		{
+			"identifier": "eiscafe-milano-",
+			"name": "Eiscafe Milano ",
+			"city": "Dortmund",
+			"description": "Einige vegane Fruchteissorten, Kaffeespezialit&auml;ten mit Sojamilch sowie vegane Nudelgerichte und Lasagne sind hier zu bekommen! \r\nDas Team w&uuml;rde gerne das vegane Angebot bei entsprechender Nachfrage erweitern!"
+		},
+		{
+			"identifier": "eis-bei-coccola-in-heppenheim",
+			"name": "Eis bei  Coccola in Heppenheim ",
+			"city": "Heppenheim",
+			"description": "Mittlerweile hat Coccola in Heppenheim drei vegane Eissorten: Kokos, Schokolade und Cranberry. Aehr lecker und mit 1&euro; pro Kugel ein ad&auml;quater Preis, zumal die Kugeln recht gro&szlig; sind. Sahnig und frisch im Geschmack.&nbsp;"
+		},
+		{
+			"identifier": "pearlicious-",
+			"name": "Pearlicious ",
+			"city": "Landau",
+			"description": "Ehemals als Bubble Bar bekannt, bietet das \"Pearlicious\" nun zus&auml;tzlich Kaffee, Tee und Kuchen an. Meistens sind alle Kuchen vegan. Den Kaffee, Cappuccino etc. kann man wahlweise mit Sojamilch bekommen. Kuchen und Kaffee sind sehr lecker.&nbsp;"
+		},
+		{
+			"identifier": "black-cat-tattoo-berlin",
+			"name": "Black Cat Tattoo Berlin ",
+			"city": "Berlin",
+			"description": "Wir sind ein Tattoostudio / T&auml;towierstudio in der W&uuml;hlischstra&szlig;e 34 im     Berliner Bezirk Friedrichshain, mit dem Namen \"Black Cat Tattoo Berlin\".\r\n     â¨Wir  bieten euch individuell gestaltete     T&auml;towierungen/Tattoos in unterschiedlichen Stilrichtungen von  grossartigen &amp; erfahrenen T&auml;towierern. Jedes Motiv wird von uns  speziell nach euren W&uuml;nschen vorbereitet, was eure T&auml;towierung zu     einem Unikat macht. Zur Inspiration steht euch hier eine sehr grosse  Auswahl aus Stamm-und Gastt&auml;towierern aus aller Welt , zur Verf&uuml;gung , inkl. deren Arbeiten &amp; Erfahrungen.\r\n     â¨Unser Team der T&auml;towierer ist in letzter Zeit um einige sehr talentierte T&auml;towierer     bereichert worden. Ihr k&ouml;nnt in unserem Tattoo Studio unter anderem z.B. aus den Arbeiten von Rodrigo, Carlos , Mariano , Sergi , Emil und Matias ausw&auml;hlen. Die Tattoo     Fotogalerien bieten euch einen kleinen Einblick in unsere k&uuml;nstlerische Bandbreite.â¨\r\n     Termine vergeben wir nicht nur im Tattoo Studio Berlin, wo ihr     nat&uuml;rlich auch kompetent und ausf&uuml;hrlich beraten werdet, sondern auch per Mail und am Telefon nach der T&auml;tigung einer Anzahlung, z.B. per PayPal. Um euch bei uns t&auml;towieren     lassen zu k&ouml;nnen m&uuml;sst ihr mindesten 18 Jahre alt sein! \r\nEin sehr hoher Hygienestandard und neueste     Sterilisationstechnik sind im &bdquo;Black Cat Tattoo Berlin\"&nbsp; selbstverst&auml;ndlich!!!! \r\nWir  realisieren Dein Tattoo-Projekt, da&szlig; Du in Abstimmung mit einem  T&auml;towierer deiner     Wahl individuell f&uuml;r dich zeichnen lassen kannst. Wir bieten Dir in  unserem Tattoo Shop weiterhin an, ungew&uuml;nschte Tattoos mit sogenannten  \"CoverUp&acute;s\" &uuml;ber zu t&auml;towieren, und wir k&ouml;nnen auf Wunsch auch vegane Tattoos  anbieten. \r\nâ¨Besucht  uns einfach mal zu unseren &Ouml;ffnungszeiten von Montags bis Samstags in  der Zeit     von 12:00 bis 19:00 Uhr um euch einen eigenen Eindruck von uns und  unseren Arbeiten zu machen. Solltet ihr Fragen an uns haben, so  beantworten wir diese nat&uuml;rlich auch gern per e-mail unter     blackcattattooberlin@gmail.com oder ruft uns an +49(0) 30 351 253  10.\r\n     \r\n     Das Team von Black Cat Tattoo Berlin"
+		},
+		{
+			"identifier": "steinbergs-restaurant-und-hotel-wildewiese",
+			"name": "Steinbergs Restaurant und Hotel Wildewiese ",
+			"city": "Sundern",
+			"description": "Geheimtipp f&uuml;r vegane Wanderer und Skibegeisterte!\r\nDas Restaurant bietet ca 15-20 vegetarische Gerichte und 4-5 vegane auf der Karte! Auf Wunsch werden auch die vegetarischen vegan zubereitet! Das Personal ist &uuml;beraus freundlich und zuvorkommend! Das Essen wird stetes aus den frischesten regionalen Zutataen zubereitet und hat hohe Qualit&auml;t! Eine absolute Empfehlung, um in angenehmer Atmosph&auml;re den Abend ausklingen zu lassen, auch wenn man dort nicht im Hotel unterkommen m&ouml;chte, sondern nur im Sauerland ein gem&uuml;tliches veganes Restaurant sucht!\r\nHier kommt man in einer liebevoll modern gestaltetem 3* Hotel unter, was mind. 4* verdient h&auml;tte! Dies wurde erst vor 3 Jahren neu gebaut! Eine hauseigene Sauna (90&deg; und 65&deg; mit Tauchk&uuml;hlbecken und verschiedenen Erlebnisduschen) runden den entspannten Abend nach dem Sport ab!\r\nDas morgendliche Fr&uuml;hst&uuml;cksbuffet ist &uuml;berdurchschnittlich reichhaltig und winkt mit leckeren Nussbr&ouml;tchen sowie gro&szlig;er Rohkost-, M&uuml;sli- und Marmeladenauswahl! Wir waren bis 16 Uhr nachmittags auf unsrer Wanderung auf dem Sauerland H&ouml;henflug, der &uuml;brigens direkt vorbei f&uuml;hrt, ges&auml;ttigt!"
+		},
+		{
+			"identifier": "meiwok-v",
+			"name": "MeiWok V ",
+			"city": "",
+			"description": "Beste asiatische K&uuml;che mit hausgemachten Pasten und So&szlig;en (Thai Curry Paste, Thai Erdnuss Paste, Chinesisch S&uuml;&szlig; Sauer So&szlig;e etc. ......)\r\rWir kochen nur mit Bio - Obst und Gem&uuml;se in Demeter Qualit&auml;t.&nbsp;\r\r\r\rBio gr&uuml;ne Smoothies zum selbst zusammenstellen, frisch gepresste Bio Fruchts&auml;fte, Superfoods, leckere Kuchen aus Bio Weizenvollkornmehl z.B. Maulwurfkuchen mit hauseigener Kokossahne, Pandankuchen, Maniokkuchen uvm.&nbsp;\r\r\r\rDas meiste ist auch glutenfrei erh&auml;ltlich."
+		},
+		{
+			"identifier": "holtmanns",
+			"name": "Holtmanns ",
+			"city": "Rheine",
+			"description": "Gem&uuml;tliches Restaurant mit sehr leckeren Speisen, freundlichem Personal und fairen Preisen.&nbsp;\r\n\r\n\r\n\r\n\r\n&nbsp;Ein Besuch lohnt sich auf jeden Fall!"
+		},
+		{
+			"identifier": "walder-weinladen",
+			"name": "Walder Weinladen ",
+			"city": "Solingen",
+			"description": ""
+		},
+		{
+			"identifier": "hongkong-imbiss",
+			"name": "Hongkong Imbiss ",
+			"city": "",
+			"description": "-Kleines, freundliches chinesisches Restaurant im Stadtzentrum mit zahlreichen veganen Optionen, darunter sogar Seitan aus Eigenherstellung (\"mock duck\").\r\n-Alle Speisen auch zum Mitnehmen.\r\n-Die als scharf gekennzeichneten Gerichte k&ouml;nnen auch in milder Variante bestellt werden.\r\n\r\nVegane Optionen\r\n\r\nVORSPEISEN\r\n5. Curry-Kok (6 St&uuml;ck) (Bl&auml;tterteig vegan?) \r\n\r\nVEGETARISCHE GERICHTE\r\nA10 Gebratene Nudeln mit Soja und Gem&uuml;se \r\n\r\nSU-YA (= falsche Ente)\r\nV1 Su-Ya (mit verschiedenem Gem&uuml;se) (scharf)\r\nV2 Su-Ya (mit verschiedenem Gem&uuml;se in Curry-So&szlig;e) (scharf)\r\nV3 Su-Ya Kung Pau (mit verschiedenem Gem&uuml;se) (scharf)\r\nV4 Su-Ya Szechuan (mit Bambus, Karotten und Paprika) (scharf)\r\nV5 Su-Ya Kanton (mit verschiedenem Gem&uuml;se in Kanton-So&szlig;e) (scharf)\r\nV6 Su-Ya (mit s&uuml;&szlig;-saurer So&szlig;e)\r\nV7 Su-Ya Chop-Kham-Po (mit verschiedenem Gem&uuml;se in Spezial-So&szlig;e (serviert im Topf)) (scharf)\r\n\r\nTOFU\r\nV8 Tofu (mit verschiedenem Gem&uuml;se) (scharf)\r\nV9 Tofu (mit verschiedenem Gem&uuml;se in Curry-So&szlig;e) (scharf)\r\nV10 Tofu Kung Pau (mit verschiedenem Gem&uuml;se) (scharf)\r\nV11 Tofu Szechuan (mit Bambus, Karotten und Paprika) (scharf)\r\nV12 Tofu Kanton (mit verschiedenem Gem&uuml;se in Kanton-So&szlig;e) (scharf)\r\nV13 Tofu Chop-Kham-Po (mit verschiedenem Gem&uuml;se in Spezial-So&szlig;e (serviert im Topf)) (scharf)"
+		}
+	]
+}
