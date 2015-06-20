@@ -305,7 +305,29 @@ angular.module('mvg.api', []).factory('ApiService', ['$http', '$localStorage', '
 				'searchByCoords',  // api function name
 				callback // callback which gets called with data
 			);
-		}
+		},
+
+	    /** 
+		 * @ngdoc method
+		 * @name listNewPlaces
+		 * @methodOf app.api.ApiService
+		 * @description
+		 * Executes a callback with a list of all new places as parameter
+		 *
+		 * @see {@link http://veganguide.org/feeds| places RSS feed}
+		 * @param {fn} callback - Function to execute
+		 */
+	    listNewPlaces: function(callback) {
+	        get(
+                this.url + 'veganguide/newplaces', // url to the api call
+                'listNewPlaces',  // api function name
+                callback, // callback which gets called with data
+                function(data) { // function to maniuplate data before caching
+                    return data;
+                }
+            );
+	    }
 
 	};
+
 }]);

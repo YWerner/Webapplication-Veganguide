@@ -1,4 +1,13 @@
 /********************/
+/* Any page */
+/* Utility for inner padding at the bottom, should be used
+ * so user also see the full items on the end of the documents
+ */
+.padding-bottom-big {
+    padding-bottom: 50px;
+}
+
+/********************/
 /* Page: List(s) */
 /* "X" - clear button at the right of an input element */
 .button.button-icon.input-button {
