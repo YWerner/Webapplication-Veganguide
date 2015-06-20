@@ -29,7 +29,10 @@ angular.module('mvg.api', []).factory('ApiService', ['$http', '$localStorage', '
 		getInfo: 600,
 		getComments: 600,
 		getImage: 600,
-        searchByCoords: 600
+		searchByCoords: 600,
+	    listNewPlaces: 600,
+	    getBlogEntries:600,
+        getBlogComments: 600
 	};
 
 	/** 
@@ -326,7 +329,48 @@ angular.module('mvg.api', []).factory('ApiService', ['$http', '$localStorage', '
                     return data;
                 }
             );
-	    }
+	    },
+
+	    /** 
+		 * @ngdoc method
+		 * @name getBlogEntries
+		 * @methodOf app.api.ApiService
+		 * @description
+		 * Executes a callback with a list of blog entries.
+		 *
+		 * @param {fn} callback - Function to execute
+		 */
+	    getBlogEntries: function(callback) {
+	        get(
+                this.url + 'veganguide/local/' + safe(this.lang) + '/blog', // url to the api call
+                'geBlogEntries',  // api function name
+                callback, // callback which gets called with data
+                function(data) { // function to maniuplate data before caching
+                    return data;
+                }
+            );
+	    },
+
+	    /** 
+		 * @ngdoc method
+		 * @name getBlogComents
+		 * @methodOf app.api.ApiService
+		 * @description
+		 * Executes a callback with a list of comments to a blog entry.
+		 *
+         * @param {string} identifier - Id of the blog entry
+		 * @param {fn} callback - Function to execute
+		 */
+	    getBlogComments: function (identifier, callback) {
+	    get(
+            this.url + 'veganguide/local/' + safe(this.lang) + '/blog/identifier/' + safe(identifier), // url to the api call
+            'getBlogComments',  // api function name
+            callback, // callback which gets called with data
+            function(data) { // function to maniuplate data before caching
+                return data;
+            }
+        );
+	}
 
 	};
 

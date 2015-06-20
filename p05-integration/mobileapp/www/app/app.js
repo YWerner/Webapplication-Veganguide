@@ -1,17 +1,17 @@
 angular.module('mvg', [
-                'ionic',
-                'ngSanitize',
-                'ngStorage',
-                'ngOrderObjectBy',
-                'ngMap',
-                'ion-google-place',
-                'geolocation',
-                'mvg.api',
-                'mvg.general',
-                'mvg.local',
-                'mvg.place',
-                'mvg.search',
-                'mvg.new'
+                'ionic',            // Ionic-Framework
+                'ngSanitize',       // Sanitizing HTML output of users
+                'ngStorage',        // Local Storage interface
+                'ngOrderObjectBy',  // Order objects @notused
+                'ngMap',            // Google Maps interface
+                'ion-google-place', // Location dropdown directive that utilizes google maps
+                'mvg.api',          // Backend API
+                'mvg.general',      // General things like navigation
+                'mvg.local',        // List countries, cities, places
+                'mvg.place',        // Detail page of a place
+                'mvg.search',       // Search places including a map
+                'mvg.new',          // Show recently added places
+                'mvg.blog'          // Show blog entries of veganguide.org
             ])
 
 // run
@@ -101,6 +101,14 @@ angular.module('mvg', [
                     'menuContent': {
                         templateUrl: "app/components/new/NewView.html",
                         controller: 'NewController'
+                    }
+                }
+            }).state('app.blog', {
+                url: "/blog",
+                views: {
+                    'menuContent': {
+                        templateUrl: "app/components/blog/BlogView.html",
+                        controller: 'BlogController'
                     }
                 }
             });
