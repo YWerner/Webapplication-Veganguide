@@ -1,9 +1,9 @@
 <ion-view>
     <ion-nav-title>Neue Lokale</ion-nav-title>
-    <ion-content class="padding-bottom-big">
+    <ion-content>
         <div class="card" ng-repeat="place in places.data">
             <div class="item item-divider" ng-bind-html="place.name">Lokal</div>
-            <div class="item item-text-wrap-multiline" ng-bind-html="place.description" ng-if="place.description"></div>
+            <div class="item item-text-wrap-multiline" ng-bind-html="place.description | trim" ng-if="place.description"></div>
             <div class="item tabs tabs-secondary tabs-icon-left">
                 <span class="tab-item"><i class="icon ion-home balanced"></i><span ng-bind="place.city"></span></span>
                 <span class="tab-item"><i class="icon ion-ios-calendar-outline balanced"></i><span ng-bind="place.date"></span></span>

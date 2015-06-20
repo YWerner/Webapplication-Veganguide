@@ -114,7 +114,7 @@ angular.module('mvg', [
             });
 
         // if none of the above states are matched, use this as the fallback
-        $urlRouterProvider.otherwise('/app/local');
+        $urlRouterProvider.otherwise('/app/new');
 
         // loading indicator while $http request
         $httpProvider.interceptors.push(function ($rootScope) {

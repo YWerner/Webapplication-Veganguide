@@ -9,8 +9,13 @@
  */
 angular.module('mvg.api').filter('trim', function () {
     return function (str) {
-        return (str || '').replace(/(^\s*|\s*$)/g, function (match, group) {
-            return '';
-        });
+        return (str || '')
+            .replace(/&nbsp;/g, function (match, group) {
+                return '';
+            }).replace(/^\s*/g, function (match, group) {
+                return '';
+            }).replace(/\s*$/g, function (match, group) {
+                return '';
+            });
     }
 });
