@@ -111,6 +111,27 @@ angular.module('mvg', [
                         controller: 'BlogController'
                     }
                 }
+            }).state('app.impress', {
+                url: "/impress",
+                views: {
+                    'menuContent': {
+                        templateUrl: "app/components/static/ImpressView.html"
+                    }
+                }
+            }).state('app.about', {
+                url: "/about",
+                views: {
+                    'menuContent': {
+                        templateUrl: "app/components/static/AboutView.html"
+                    }
+                }
+            }).state('app.terms', {
+                url: "/terms",
+                views: {
+                    'menuContent': {
+                        templateUrl: "app/components/static/TermsView.html"
+                    }
+                }
             });
 
         // if none of the above states are matched, use this as the fallback
