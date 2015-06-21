@@ -4,7 +4,7 @@ namespace Api\Model;
 use Symfony\Component\HttpFoundation\Request;
 
 class CacheModel {
-	private $_cachetime = 1800; //60*60
+	private $_cachetime = 86400; //60*60*24
 
 	public function _getcache($cachefile)
 	{		
