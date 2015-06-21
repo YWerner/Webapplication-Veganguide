@@ -5,7 +5,7 @@
 * Controller for the search page.
 
 */
-angular.module('mvg.search', []).controller('SearchController', function ($scope, $rootScope, $stateParams, $ionicSideMenuDelegate, Search) {
+angular.module('mvg.search', []).controller('SearchController', function ($scope, $rootScope, $stateParams, $ionicSideMenuDelegate, $ionicBackdrop, Search) {
 
     // Settings and setup
     $scope.lookup = {
@@ -78,8 +78,8 @@ angular.module('mvg.search', []).controller('SearchController', function ($scope
         // create via google maps object an InfoWindow
         var infowindow = new google.maps.InfoWindow();
         var center = new google.maps.LatLng(place.coords.lat, place.coords.lon);
-        var content = '<h4>' + place.name + '</h4>' +
-                      '<a class="button icon-right ion-chevron-right button-balanced" href="#/app/place/' + place.identifier + '">' + place.distance + ' km, Details</a>';
+        var content = '<h4>' + place.name + ' (' +  place.distance + ' km)</h4>' +
+                      '<a class="button icon-right ion-chevron-right button-balanced" href="#/app/place/' + place.identifier + '">Details</a>';
         infowindow.setContent(content);
         infowindow.setPosition(center);
         infowindow.open($scope.map);
@@ -97,6 +97,7 @@ angular.module('mvg.search', []).controller('SearchController', function ($scope
     */
     $scope.$watch('lookup.input', function (value) {  // watch for changes on the data of place
         console.log("Map: Input changed");
+        $ionicBackdrop.release(); // WP8 fix, directive doesn't released backdrop
         $scope.search.position = value;
         if ($scope.map) {
             // loading screen
