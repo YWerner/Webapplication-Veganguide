@@ -160,7 +160,7 @@ class VeganModel extends XmlModel {
     }
 	
 	public function getBlogThemes()
-	{
+	{	
 		$dom_document = new \DOMDocument();
 		$dom_document->loadHTMLFile("http://veganguide.org/blog");
 		$xpath = new \DOMXpath($dom_document);
@@ -172,20 +172,18 @@ class VeganModel extends XmlModel {
 			$blog[$count]["head"]=$xpath->query("h3/a" , $element)->item(0)->nodeValue;
 			$blog[$count]["supplier"]=$xpath->query("p/a" , $element)->item(0)->nodeValue;
 			$blog[$count]["href"]=$xpath->query("h3/a/@href" , $element)->item(0)->nodeValue;
-			$blog[$count]["body"]=$xpath->query("p" , $element)->item(1)->nodeValue;
-			$identifier=explode("http://veganguide.org/blog/", $blog[$count]["href"]);
-			if(count($identifier)>1)
-			{
-				$blog[$count]["identifier"]=$identifier[1];
-			}
-			else
-			{
-				$blog[$count]["identifier"]=null;
-			}
+				$body=$xpath->query("p" , $element)->item(1)->nodeValue;
+			$blog[$count]["body"]=trim($body);
+				$date=$xpath->query("p", $element)->item(0)->textContent;
+				$date=explode(" von ",$date);
+			$blog[$count]["date"]=$date[0];
+				$href=$xpath->query("h3/a/@href" , $element)->item(0)->nodeValue;
+				$identifier=explode("http://veganguide.org/blog/", $href);
+			$blog[$count]["identifier"]= (count($identifier)>1 ? $identifier[1] : null);
+
 			$count++;
 		}
 		$response['data']=$blog;
-		
 		return $response;
 	}
 	
