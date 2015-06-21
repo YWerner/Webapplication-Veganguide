@@ -176,7 +176,7 @@ class VeganModel extends XmlModel {
 			$blog[$count]["body"]=trim($body);
 				$date=$xpath->query("p", $element)->item(0)->textContent;
 				$date=explode(" von ",$date);
-			$blog[$count]["date"]=$date[0];
+			$blog[$count]["date"]=str_replace(" ","T",$date[0]);
 				$href=$xpath->query("h3/a/@href" , $element)->item(0)->nodeValue;
 				$identifier=explode("http://veganguide.org/blog/", $href);
 			$blog[$count]["identifier"]= (count($identifier)>1 ? $identifier[1] : null);
@@ -206,7 +206,9 @@ class VeganModel extends XmlModel {
 			{
 				$comments[$comments_index]["supplier"]=$xpath_comments->query("h4/a" , $com)->item(0)->nodeValue;
 				$comments[$comments_index]["body"]=$xpath_comments->query("blockquote" , $com)->item(0)->nodeValue;
-				$comments[$comments_index]["date"]=$xpath_comments->query("h4/span" , $com)->item(0)->nodeValue;
+					$date=$xpath_comments->query("h4/span" , $com)->item(0)->nodeValue;
+					$date=explode(' ',str_replace('.','',$date));
+				$comments[$comments_index]["date"]=$date[2].'-'.$date[1].'-'.$date[0].'T'.$date[3];
 				$comments[$comments_index]["supplier_img"]=($xpath_comments->query("img/@src" , $com)->length>0) ? $xpath_comments->query("img/@src" , $com)->item(0)->nodeValue : null;
 			}
 			$comments_index++;

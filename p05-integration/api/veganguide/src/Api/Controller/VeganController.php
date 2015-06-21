@@ -69,10 +69,8 @@ class VeganController {
 			$this->_model->city = ($request->attributes->get('city') ? $request->attributes->get('city') : "leipzig");
 			$this->_model->lang = ($request->attributes->get('lang') ? $request->attributes->get('lang') : "de");
 			$this->_model->country = ($request->attributes->get('country') ? $request->attributes->get('country') : "germany");
-			$this->_model->answerparams = array("rating", "comments", "submitter", "address", "city", "country", "coords");
-			
+			$this->_model->answerparams = array("rating", "comments", "submitter", "address", "city", "country", "coords");		
 			$result = $this->_model->getPlacesByCity();
-			echo '<pre>'; var_dump($result); 
 			$json=json_encode($result);
 			$this->_cache->_writecache($cachefile, $json);
 			return $app->json($result);
