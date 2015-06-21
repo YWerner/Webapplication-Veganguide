@@ -56,7 +56,7 @@ angular.module('mvg.local').factory('PlaceList', ['ApiService', function(ApiServ
 		 */
 		this.load = function(country, city) {
 			var self = this; // to reach 'this' in the callback
-			ApiService.listPlacesByCity(country, city, function(response) { // get data using api
+			ApiService.listPlacesByCity(country, city, function (response) { // get data using api
 				angular.extend(self, response); // inject data back
 			});	
 		};

@@ -166,7 +166,6 @@ angular.module('mvg.api', []).factory('ApiService', ['$http', '$localStorage', '
 		 * @param {fn} callback - Function to execute
 		 */
 		listCountries: function(callback) {
-			//get('api/JSON_Dummies/Countries.json', 'listCountries', callback);
 			get(
 				this.url + 'veganguide/local/' + safe(this.lang), // url to the api call
 				'listCountries', // api function name
@@ -192,7 +191,6 @@ angular.module('mvg.api', []).factory('ApiService', ['$http', '$localStorage', '
 		 * @param {fn} callback - Function to execute
 		 */
 		listCities: function(country, callback) {
-			//get('api/JSON_Dummies/Cities_Germany.json', 'listCities', callback);
 			get(
 				this.url + 'veganguide/local/' + safe(this.lang) + '/country/' + safe(country), // url to the api call
 				'listCities', // api function name
@@ -218,14 +216,13 @@ angular.module('mvg.api', []).factory('ApiService', ['$http', '$localStorage', '
 		 * @param {fn} callback - Function to execute
 		 */
 		listPlacesByCity: function(country, city, callback) {
-			//get('api/JSON_Dummies/Lokale_Leipzig.json', 'listPlacesByCity',  callback);
 			get(
 				this.url + 'veganguide/local/' + safe(this.lang) + '/country/' + safe(country) + '/city/' + safe(city), // url to the api call
 				'listPlacesByCity',  // api function name
 				callback, // callback which gets called with data
 				function(data) { // function to maniuplate data before caching
 					data.data = $filter('unique')(data.data, 'name'); // discarded duplicate entries by name
-					data.data = $filter('noFaulty')(data.data, 'name'); // discard entries beginning with a '!'
+				    data.data = $filter('noFaulty')(data.data, 'name'); // discard entries beginning with a '!'
 					return data;
 				}
 			);
@@ -362,15 +359,15 @@ angular.module('mvg.api', []).factory('ApiService', ['$http', '$localStorage', '
 		 * @param {fn} callback - Function to execute
 		 */
 	    getBlogComments: function (identifier, callback) {
-	    get(
-            this.url + 'veganguide/local/' + safe(this.lang) + '/blog/identifier/' + safe(identifier), // url to the api call
-            'getBlogComments',  // api function name
-            callback, // callback which gets called with data
-            function(data) { // function to maniuplate data before caching
-                return data;
-            }
-        );
-	}
+	        get(
+                this.url + 'veganguide/local/' + safe(this.lang) + '/blog/identifier/' + safe(identifier), // url to the api call
+                'getBlogComments',  // api function name
+                callback, // callback which gets called with data
+                function(data) { // function to maniuplate data before caching
+                    return data;
+                }
+            );
+	    }
 
 	};
 
