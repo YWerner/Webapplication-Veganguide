@@ -41,7 +41,7 @@ angular.module('mvg', [
     })
 
 // config like routes
-    .config(function ($stateProvider, $urlRouterProvider, $httpProvider) { // , uiGmapGoogleMapApiProvider
+    .config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
 
         // routes
         $stateProvider
