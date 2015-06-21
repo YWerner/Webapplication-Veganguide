@@ -97,6 +97,7 @@ class VeganModel extends XmlModel {
         );
 
         $response = $this->_doApiCall($method, $data);
+			$response['data']['description'] = trim($response['data']['description']);
         return $response;
     }
 	
@@ -205,7 +206,7 @@ class VeganModel extends XmlModel {
 			if($comments_index>-1)
 			{
 				$comments[$comments_index]["supplier"]=$xpath_comments->query("h4/a" , $com)->item(0)->nodeValue;
-				$comments[$comments_index]["body"]=$xpath_comments->query("blockquote" , $com)->item(0)->nodeValue;
+				$comments[$comments_index]["body"]=trim($xpath_comments->query("blockquote" , $com)->item(0)->nodeValue);
 					$date=$xpath_comments->query("h4/span" , $com)->item(0)->nodeValue;
 					$date=explode(' ',str_replace('.','',$date));
 				$comments[$comments_index]["date"]=$date[2].'-'.$date[1].'-'.$date[0].'T'.$date[3];
