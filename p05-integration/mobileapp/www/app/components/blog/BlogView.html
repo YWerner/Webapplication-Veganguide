@@ -6,7 +6,7 @@
             <div class="item item-text-wrap-multiline" ng-bind-html="entry.body | trim"></div>
             <div class="item tabs tabs-secondary tabs-icon-left">
                 <span class="tab-item"><i class="icon ion-person balanced"></i><span ng-bind="entry.supplier"></span></span>
-                <span class="tab-item"><i class="icon ion-ios-calendar-outline balanced"></i><span ng-bind="entry.date"></span></span>
+                <span class="tab-item"><i class="icon ion-ios-calendar-outline balanced"></i><span ng-bind="entry.date | date : 'dd.MM.yy'"></span></span>
                 <a class="tab-item" ng-click="toggleComments(entry.identifier)"><i class="icon ion-android-chat balanced"></i>Kommentare</a>
             </div>
             <ion-item ng-repeat="comment in blog.comments[entry.identifier].data" ng-if="showComments[entry.identifier]">
