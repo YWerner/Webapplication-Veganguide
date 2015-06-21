@@ -150,11 +150,14 @@ class VeganModel extends XmlModel {
 	    foreach($xml->channel->item as $item) {
 	    	$link = explode('/', $item->link);
 	        $title = explode('(', $item->title);
+			$ns_dc = $item->children('http://purl.org/dc/elements/1.1/');
+			$date = $ns_dc->date;
 	        $return['data'][] = array(
 	        	'identifier' => $link[(count($link)-1)],
 	        	'name' => ($title[0]),
 	        	'city' => (substr($title[1], 0, -1)),
-	        	'description' => trim($item->description)
+	        	'description' => trim($item->description),
+				'date' => substr($date, 0, strlen($date)-4)
 	        );
 	    }
 	    return $return;
