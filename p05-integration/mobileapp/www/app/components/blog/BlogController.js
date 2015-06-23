@@ -14,15 +14,17 @@ angular.module('mvg.blog', []).controller('BlogController', function ($scope, $t
     // Show blog comments on click
     $scope.showComments = {};
     $scope.toggleComments = function (identifier) { // trigger for comments loading
-        console.log($scope.blog);
         if ($scope.blog.comments[identifier] === undefined) { // first call
-            $scope.showComments[identifier] = false; // init state
             $scope.blog.getComments(identifier); // load comments
+            $timeout(function () { // scroll to first entry -> ToDo: should be improved
+                $scope.showComments[identifier] = true; // init state
+            }, 500);
+        } else { // any other call
+            $scope.showComments[identifier] = !$scope.showComments[identifier]; // toggle state if to show or hide the comments
+            $timeout(function () { // scroll to first entry -> ToDo: should be improved
+                $ionicScrollDelegate.scrollBy(0, 175, true); // scroll down 250px
+            }, 750);
         }
-        $scope.showComments[identifier] = !$scope.showComments[identifier]; // toggle state if to show or hide the comments
-        $timeout(function () { // scroll to first entry -> ToDo: should be improved
-            $ionicScrollDelegate.scrollBy(0, 175, true); // scroll down 250px
-        }, 750); //
     };
 
 });
