@@ -44,12 +44,12 @@
                     <label class="item item-input item-select">
                         <span class="input-label">Radius:</span>
                         <select ng-model="lookup.radius" id="radius-select">
-                            <option selected>{{lookup.radius}} km</option>
-                            <option>1 km</option>
-                            <option>5 km</option>
-                            <option>10 km</option>
-                            <option>25 km</option>
-                            <option>50 km</option>
+                            <option ng-value="lookup.radius" selected>{{lookup.radius}} km</option>
+                            <option value="1">1 km</option>
+                            <option value="5">5 km</option>
+                            <option value="10">10 km</option>
+                            <option value="25">25 km</option>
+                            <option value="50">50 km</option>
                         </select>
                     </label>
                     <div class="item range range-positive">
