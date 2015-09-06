@@ -124,8 +124,8 @@ angular.module('mvg.search').factory('Search', ['ApiService', function (ApiServi
             // reset geo status
             this.geostatus = true;
             this.load( // load restaurants around coords
-                this.position.geometry.location.A,
-                this.position.geometry.location.F,
+                this.position.geometry.location.G, // old .A
+                this.position.geometry.location.K, // old .F
                 this.radius,
                 callback
             );
