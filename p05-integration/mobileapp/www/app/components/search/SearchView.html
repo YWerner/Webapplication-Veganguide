@@ -21,7 +21,7 @@
             <ion-content scroll="false" ng-switch-when="true">
                 <ng-include src="'app/components/search/SearchViewInput.html'"></ng-include>
                 <div scroll="false" class="mapWrap" data-tap-disabled="true">
-                    <map center="51.312834,12.376058" zoom="12" disable-default-u-i="true" zoom-control="true" scale-control="true">
+                    <map center="51.312834,12.376058" zoom="12" disable-default-u-i="true" zoom-control="true" zoom-control-options="{style:'SMALL', position:'LEFT'}" scale-control="false">
                         <marker position="{{search.position.geometry.location.lat()}},{{search.position.geometry.location.lng()}}"
                                 title="Gesuchte Position"
                                 icon="http://maps.google.com/mapfiles/kml/pushpin/grn-pushpin.png"
