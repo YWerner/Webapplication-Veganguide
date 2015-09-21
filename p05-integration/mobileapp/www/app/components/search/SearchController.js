@@ -72,7 +72,7 @@ angular.module('mvg.search', []).controller('SearchController', function ($scope
     * Creates and show an info window to an place.
     *
     * @param {object} event - Event which triggered this method
-    * @param {object} place - Place data 
+    * @param {object} place - Place data
     */
     $scope.showInfoWindow = function (event, place) {
         // create via google maps object an InfoWindow
@@ -105,7 +105,7 @@ angular.module('mvg.search', []).controller('SearchController', function ($scope
             // change position
             $scope.search.lookup(function (search) {
                 console.log("Map: Lookup");
-                var LatLng = new google.maps.LatLng(search.position.geometry.location.G, search.position.geometry.location.K); // old: .A, .F
+                var LatLng = new google.maps.LatLng(search.position.geometry.location.lat(), search.position.geometry.location.lng()); // old: .A, .F
                 $scope.map.setCenter(LatLng); // center map on user position
                 google.maps.event.trigger($scope.map, 'resize');
                 $rootScope.$broadcast('loading:hide'); // hide load screen after loading

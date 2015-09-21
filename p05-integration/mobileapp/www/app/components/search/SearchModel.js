@@ -5,11 +5,11 @@
  * Data model for the search.
  * Works as services.
  * Is created by a self-named factory.
- * 
+ *
  * @param {string} Service name
  * @param {string} ApiService
  * @param {fn} Factory function with any parameter defined so far
- * @returns {object} Search 
+ * @returns {object} Search
  */
 angular.module('mvg.search').factory('Search', ['ApiService', function (ApiService) {
 
@@ -45,7 +45,7 @@ angular.module('mvg.search').factory('Search', ['ApiService', function (ApiServi
 		 * @name initialize
 		 * @methodOf app.place.Search
 		 * @description
-		 * Constructor. 
+		 * Constructor.
 		 *
 		 */
         this.initialize = function () {
@@ -124,15 +124,15 @@ angular.module('mvg.search').factory('Search', ['ApiService', function (ApiServi
             // reset geo status
             this.geostatus = true;
             this.load( // load restaurants around coords
-                this.position.geometry.location.G, // old .A
-                this.position.geometry.location.K, // old .F
+                this.position.geometry.location.lat(), // old .A
+                this.position.geometry.location.lng(), // old .F
                 this.radius,
                 callback
             );
         }
 
         /**
-		 * Call constructor. 
+		 * Call constructor.
 		 */
         this.initialize();
     };
