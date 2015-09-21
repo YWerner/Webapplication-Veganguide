@@ -105,7 +105,7 @@ angular.module('mvg.search', []).controller('SearchController', function ($scope
             // change position
             $scope.search.lookup(function (search) {
                 console.log("Map: Lookup");
-                var LatLng = new google.maps.LatLng(search.position.geometry.location.A, search.position.geometry.location.F);
+                var LatLng = new google.maps.LatLng(search.position.geometry.location.G, search.position.geometry.location.K); // old: .A, .F
                 $scope.map.setCenter(LatLng); // center map on user position
                 google.maps.event.trigger($scope.map, 'resize');
                 $rootScope.$broadcast('loading:hide'); // hide load screen after loading
